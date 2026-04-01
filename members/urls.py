@@ -4,8 +4,8 @@ from .views import MemberViewSet, RoleViewSet, member_list, member_detail
 from . import views
 
 router = DefaultRouter()
-router.register('members', MemberViewSet)
-router.register('roles', RoleViewSet)
+router.register(r'', MemberViewSet, basename='member')
+router.register(r'', RoleViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

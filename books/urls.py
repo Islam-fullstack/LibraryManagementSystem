@@ -4,10 +4,10 @@ from .views import AuthorViewSet, BookViewSet, GenreViewSet, PublisherViewSet
 from . import views
 
 router = DefaultRouter()
-router.register('authors', AuthorViewSet)
-router.register('books', BookViewSet)
-router.register('genres', GenreViewSet)
-router.register('publishers', PublisherViewSet)
+router.register('', AuthorViewSet)
+router.register('', BookViewSet)
+router.register('', GenreViewSet)
+router.register('', PublisherViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

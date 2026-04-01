@@ -4,7 +4,7 @@ from .views import BorrowingViewSet, borrowing_list
 from . import views
 
 router = DefaultRouter()
-router.register('borrowings', BorrowingViewSet)
+router.register('', BorrowingViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)), 
