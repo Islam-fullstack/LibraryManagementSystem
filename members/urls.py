@@ -3,7 +3,7 @@ from django.urls import path
 from .views import MemberViewSet, RoleViewSet, member_list, member_detail
 
 router = DefaultRouter()
-router.register(r'roles', RoleViewSet, basename='role')  # ← explicit prefix
+router.register(r'roles', RoleViewSet, basename='role')  # ← named prefix first
 router.register(r'', MemberViewSet, basename='member')   # ← '' last
 
 urlpatterns = router.urls + [

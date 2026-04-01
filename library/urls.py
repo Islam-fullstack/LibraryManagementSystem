@@ -1,10 +1,10 @@
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 from books.views import home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),          # ← home only, no duplicate path('')
+    path('', home, name='home'),
     path('api/books/', include('books.urls')),
     path('api/members/', include('members.urls')),
     path('api/borrowing/', include('borrowing.urls')),
