@@ -7,14 +7,6 @@ from django.http import HttpResponse
 def home(request):
     return render(request,'reviews/home.html')
 
-def book_list(request):
-    books = Book.objects.all()
-    return render(request, 'books/book_list.html', {'books': books})
-
-def book_detail(request, pk):
-    book = get_object_or_404(Book, pk=pk)
-    return render(request, 'books/book_detail.html', {'book': book})
-
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset=Author.objects.all()
     serializer_class=AuthorSerializer
