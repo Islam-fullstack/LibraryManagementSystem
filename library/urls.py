@@ -3,11 +3,8 @@ from django.urls import path,include
 from books.views import home
 
 urlpatterns = [
-     path('admin/', admin.site.urls),
-    path('', home, name='home'),
-    path('', include('books.urls')),
-    path('members/', include('members.urls')),
-    path('borrowing/', include('borrowing.urls')), 
+    path('admin/', admin.site.urls),
+    path('', home, name='home'),          # ← home only, no duplicate path('')
     path('api/books/', include('books.urls')),
     path('api/members/', include('members.urls')),
     path('api/borrowing/', include('borrowing.urls')),

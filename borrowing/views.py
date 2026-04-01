@@ -4,7 +4,6 @@ from .models import Borrowing
 from .serializers import BorrowingSerializer
 
 
-
 def borrowing_list(request):
     borrowings = Borrowing.objects.all()
     return render(request, 'borrowing/borrowing_list.html', {'borrowings': borrowings})
