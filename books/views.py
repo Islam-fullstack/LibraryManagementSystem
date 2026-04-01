@@ -5,7 +5,7 @@ from .serializers import AuthorSerializer, BookSerializer, GenreSerializer, Publ
 from django.http import HttpResponse
 
 def home(request):
-    return render(request,'home.html')
+    return render(request,'reviews/home.html')
 
 def book_list(request):
     books = Book.objects.all()
