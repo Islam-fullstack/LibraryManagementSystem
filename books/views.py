@@ -5,7 +5,7 @@ from .serializers import AuthorSerializer, BookSerializer, GenreSerializer, Publ
 from django.http import HttpResponse
 
 def home(request):
-    return render(request,'index.html')
+    return render(request,'reviews/index.html')
 
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset=Author.objects.all()
