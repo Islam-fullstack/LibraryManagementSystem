@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Library Management System</title>
+    <title>Kitapxana Basqarıw Sisteması</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
       rel="stylesheet"
@@ -670,12 +670,12 @@
             onclick="showPage('home');return false"
             id="nav-home"
             class="active"
-            ><span class="nav-icon">🏠</span><span>Home</span></a
+            ><span class="nav-icon">🏠</span><span>Bas bet</span></a
           >
         </li>
         <li>
           <a href="#" onclick="showPage('books');return false" id="nav-books"
-            ><span class="nav-icon">📖</span><span>Books</span></a
+            ><span class="nav-icon">📖</span><span>Kitaplar</span></a
           >
         </li>
         <li>
@@ -683,7 +683,7 @@
             href="#"
             onclick="showPage('members');return false"
             id="nav-members"
-            ><span class="nav-icon">👥</span><span>Members</span></a
+            ><span class="nav-icon">👥</span><span>Aǵzalar</span></a
           >
         </li>
         <li>
@@ -691,7 +691,7 @@
             href="#"
             onclick="showPage('borrowings');return false"
             id="nav-borrowings"
-            ><span class="nav-icon">🔄</span><span>Borrowings</span></a
+            ><span class="nav-icon">🔄</span><span>Alınǵan kitaplar</span></a
           >
         </li>
         <li>
@@ -699,84 +699,82 @@
             href="#"
             onclick="showPage('reviews');return false"
             id="nav-reviews"
-            ><span class="nav-icon">⭐</span><span>Reviews</span></a
+            ><span class="nav-icon">⭐</span><span>Pikirler</span></a
           >
         </li>
         <li>
           <a href="#" onclick="showPage('staff');return false" id="nav-staff"
-            ><span class="nav-icon">🧑‍💼</span><span>Staff</span></a
+            ><span class="nav-icon">🧑‍💼</span><span>Xızmetkerler</span></a
           >
         </li>
       </ul>
     </nav>
 
     <main>
-      <!-- HOME -->
       <div id="page-home" class="page active">
         <div class="hero">
-          <div class="hero-badge">Library Management System</div>
-          <h1>Your Knowledge Hub,<br />Organized & Accessible</h1>
+          <div class="hero-badge">Kitapxana Basqarıw Sisteması</div>
+          <h1>Bilim orayı,<br />Tártipli hám qolaylı</h1>
           <p>
-            Manage books, members, borrowings, and staff from a single elegant
-            dashboard.
+            Kitaplar, aǵzalar, alınıp-beriliwler hám xızmetkerlerdi bir jerden
+            basqarıń.
           </p>
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-number" id="stat-books">—</div>
-              <div class="stat-label">Books</div>
+              <div class="stat-label">Kitaplar</div>
             </div>
             <div class="stat-card">
               <div class="stat-number" id="stat-members">—</div>
-              <div class="stat-label">Members</div>
+              <div class="stat-label">Aǵzalar</div>
             </div>
             <div class="stat-card">
               <div class="stat-number" id="stat-borrowings">—</div>
-              <div class="stat-label">Borrowings</div>
+              <div class="stat-label">Alınǵan</div>
             </div>
           </div>
           <div class="quick-actions">
             <div class="quick-card" onclick="showPage('books')">
               <div class="quick-card-icon">📖</div>
-              <h3>Manage Books</h3>
-              <p>Add, edit, and browse the library catalog</p>
+              <h3>Kitaplardı basqarıw</h3>
+              <p>Katalogqa kitap qosıń, ózgertiń yamasa izleń</p>
             </div>
             <div class="quick-card" onclick="showPage('members')">
               <div class="quick-card-icon">👥</div>
-              <h3>Manage Members</h3>
-              <p>View and manage library members</p>
+              <h3>Aǵzalardı basqarıw</h3>
+              <p>Kitapxana aǵzaların kóriń hám basqarıń</p>
             </div>
             <div class="quick-card" onclick="showPage('borrowings')">
               <div class="quick-card-icon">🔄</div>
-              <h3>Borrowing Records</h3>
-              <p>Track book loans and returns</p>
+              <h3>Alıw hám tapsırıw</h3>
+              <p>Kitaplar qashan alınǵanın hám tapsırılǵanın baqlap barıń</p>
             </div>
             <div class="quick-card" onclick="showPage('reviews')">
               <div class="quick-card-icon">⭐</div>
-              <h3>Reviews</h3>
-              <p>Read and manage book reviews</p>
+              <h3>Pikirler</h3>
+              <p>Kitaplar haqqındaǵı pikirlerdi oqıń</p>
             </div>
             <div class="quick-card" onclick="showPage('staff')">
               <div class="quick-card-icon">🧑‍💼</div>
-              <h3>Staff</h3>
-              <p>View and manage library staff</p>
+              <h3>Xızmetkerler</h3>
+              <p>Xızmetkerler dizimin kóriń hám basqarıń</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- BOOKS -->
       <div id="page-books" class="page">
         <div class="section-header">
-          <h2>Books</h2>
+          <h2>Kitaplar</h2>
           <div class="section-actions">
             <input
               type="text"
               class="search-input"
-              placeholder="🔍 Search books…"
+              placeholder="🔍 Kitap izlew…"
               oninput="filterTable('books-tbody', this.value)"
             />
             <button class="btn btn-primary" onclick="openBookModal()">
-              ＋ Add Book
+              ＋ Kitap qosıw
             </button>
           </div>
         </div>
@@ -785,12 +783,12 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Publisher</th>
-                <th>Date</th>
-                <th>Copies</th>
-                <th>Actions</th>
+                <th>Ataması</th>
+                <th>Avtorı</th>
+                <th>Baspa xanası</th>
+                <th>Sánesi</th>
+                <th>Sanı</th>
+                <th>Ameller</th>
               </tr>
             </thead>
             <tbody id="books-tbody">
@@ -798,7 +796,7 @@
                 <td colspan="7">
                   <div class="loading">
                     <div class="spinner"></div>
-                    Loading books…
+                    Kitaplar júklenbekte…
                   </div>
                 </td>
               </tr>
@@ -807,19 +805,18 @@
         </div>
       </div>
 
-      <!-- MEMBERS -->
       <div id="page-members" class="page">
         <div class="section-header">
-          <h2>Members</h2>
+          <h2>Aǵzalar</h2>
           <div class="section-actions">
             <input
               type="text"
               class="search-input"
-              placeholder="🔍 Search members…"
+              placeholder="🔍 Aǵzalardı izlew…"
               oninput="filterTable('members-tbody', this.value)"
             />
             <button class="btn btn-primary" onclick="openMemberModal()">
-              ＋ Add Member
+              ＋ Aǵza qosıw
             </button>
           </div>
         </div>
@@ -828,11 +825,11 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>Atı-jóni</th>
                 <th>Email</th>
-                <th>Phone</th>
-                <th>Role</th>
-                <th>Actions</th>
+                <th>Telefon</th>
+                <th>Rol</th>
+                <th>Ameller</th>
               </tr>
             </thead>
             <tbody id="members-tbody">
@@ -840,7 +837,7 @@
                 <td colspan="6">
                   <div class="loading">
                     <div class="spinner"></div>
-                    Loading members…
+                    Aǵzalar júklenbekte…
                   </div>
                 </td>
               </tr>
@@ -849,19 +846,18 @@
         </div>
       </div>
 
-      <!-- BORROWINGS -->
       <div id="page-borrowings" class="page">
         <div class="section-header">
-          <h2>Borrowing Records</h2>
+          <h2>Kitap alıw jazbaları</h2>
           <div class="section-actions">
             <input
               type="text"
               class="search-input"
-              placeholder="🔍 Search…"
+              placeholder="🔍 Izlew…"
               oninput="filterTable('borrowings-tbody', this.value)"
             />
             <button class="btn btn-primary" onclick="openBorrowingModal()">
-              ＋ New Borrowing
+              ＋ Jańa jazba
             </button>
           </div>
         </div>
@@ -870,12 +866,12 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Book</th>
-                <th>Member</th>
-                <th>Borrow Date</th>
-                <th>Return Date</th>
+                <th>Kitap</th>
+                <th>Aǵza</th>
+                <th>Alınǵan kúni</th>
+                <th>Tapsırıw kúni</th>
                 <th>Status</th>
-                <th>Actions</th>
+                <th>Ameller</th>
               </tr>
             </thead>
             <tbody id="borrowings-tbody">
@@ -883,7 +879,7 @@
                 <td colspan="7">
                   <div class="loading">
                     <div class="spinner"></div>
-                    Loading records…
+                    Maǵlıwmatlar júklenbekte…
                   </div>
                 </td>
               </tr>
@@ -892,38 +888,36 @@
         </div>
       </div>
 
-      <!-- REVIEWS -->
       <div id="page-reviews" class="page">
         <div class="section-header">
-          <h2>Book Reviews</h2>
+          <h2>Kitaplar haqqında pikirler</h2>
           <div class="section-actions">
             <button class="btn btn-primary" onclick="openReviewModal()">
-              ＋ Add Review
+              ＋ Pikir qosıw
             </button>
           </div>
         </div>
         <div id="reviews-container">
           <div class="loading">
             <div class="spinner"></div>
-            Loading reviews…
+            Pikirler júklenbekte…
           </div>
         </div>
       </div>
 
-      <!-- STAFF -->
       <div id="page-staff" class="page">
         <div class="section-header">
-          <h2>Library Staff</h2>
+          <h2>Kitapxana xızmetkerleri</h2>
           <div class="section-actions">
             <button class="btn btn-primary" onclick="openStaffModal()">
-              ＋ Add Staff
+              ＋ Xızmetker qosıw
             </button>
           </div>
         </div>
         <div id="staff-container">
           <div class="loading">
             <div class="spinner"></div>
-            Loading staff…
+            Xızmetkerler júklenbekte…
           </div>
         </div>
       </div>
@@ -931,32 +925,30 @@
 
     <div id="toast-container"></div>
 
-    <!-- BOOK MODAL -->
     <div class="modal-overlay" id="book-modal">
       <div class="modal">
         <div class="modal-header">
-          <div class="modal-title" id="book-modal-title">Add Book</div>
+          <div class="modal-title" id="book-modal-title">Kitap qosıw</div>
           <button class="modal-close" onclick="closeModal('book-modal')">
             ✕
           </button>
         </div>
         <input type="hidden" id="book-id" />
-        <!-- 
-          FIX: Fields now match the real Django Book model from admin panel:
-          title, author (FK id), publisher (FK id), published_date, copies_available
-        -->
         <div class="form-group">
-          <label>Title *</label>
-          <input type="text" id="book-title" placeholder="Enter book title" />
+          <label>Ataması *</label>
+          <input
+            type="text"
+            id="book-title"
+            placeholder="Kitap atamasın kiritiń"
+          />
         </div>
         <div class="form-group">
-          <label>Author *</label>
-          <!-- FIX: Author is a FK — show select if authors loaded, else free text input -->
+          <label>Avtorı *</label>
           <select id="book-author-select" style="display: none"></select>
           <input
             type="text"
             id="book-author-text"
-            placeholder="Author name (e.g. J.K. Rowling)"
+            placeholder="Avtor atı (mıs. J.K. Rowling)"
           />
           <small
             style="color: var(--text-muted); font-size: 0.75rem"
@@ -964,12 +956,12 @@
           ></small>
         </div>
         <div class="form-group">
-          <label>Publisher</label>
+          <label>Baspa xanası</label>
           <select id="book-publisher-select" style="display: none"></select>
           <input
             type="text"
             id="book-publisher-text"
-            placeholder="Publisher name"
+            placeholder="Baspa xana atı"
           />
           <small
             style="color: var(--text-muted); font-size: 0.75rem"
@@ -977,11 +969,11 @@
           ></small>
         </div>
         <div class="form-group">
-          <label>Published Date</label>
+          <label>Basılǵan sánesi</label>
           <input type="date" id="book-published-date" />
         </div>
         <div class="form-group">
-          <label>Copies Available</label>
+          <label>Mavjud nusqalar sanı</label>
           <input
             type="number"
             id="book-copies"
@@ -992,28 +984,31 @@
         </div>
         <div class="form-footer">
           <button class="btn btn-ghost" onclick="closeModal('book-modal')">
-            Cancel
+            Biykar etiw
           </button>
           <button class="btn btn-primary" onclick="saveBook()">
-            💾 Save Book
+            💾 Saqlaw
           </button>
         </div>
       </div>
     </div>
 
-    <!-- MEMBER MODAL -->
     <div class="modal-overlay" id="member-modal">
       <div class="modal">
         <div class="modal-header">
-          <div class="modal-title" id="member-modal-title">Add Member</div>
+          <div class="modal-title" id="member-modal-title">Aǵza qosıw</div>
           <button class="modal-close" onclick="closeModal('member-modal')">
             ✕
           </button>
         </div>
         <input type="hidden" id="member-id" />
         <div class="form-group">
-          <label>Name *</label>
-          <input type="text" id="member-name" placeholder="Full name" />
+          <label>Atı-jóni *</label>
+          <input
+            type="text"
+            id="member-name"
+            placeholder="Atı-jónin kiritin'"
+          />
         </div>
         <div class="form-group">
           <label>Email *</label>
@@ -1024,175 +1019,116 @@
           />
         </div>
         <div class="form-group">
-          <label>Phone</label>
-          <input type="text" id="member-phone" placeholder="+1 234 567 8900" />
+          <label>Telefon</label>
+          <input
+            type="text"
+            id="member-phone"
+            placeholder="+998 XX XXX XX XX"
+          />
         </div>
         <div class="form-group">
-          <label>Role</label>
-          <!-- FIX: Role is a FK in the Members app (from admin panel) -->
+          <label>Rol</label>
           <select id="member-role-select">
-            <option value="">No role</option>
+            <option value="">Rol joq</option>
           </select>
         </div>
         <div class="form-footer">
           <button class="btn btn-ghost" onclick="closeModal('member-modal')">
-            Cancel
+            Biykar etiw
           </button>
           <button class="btn btn-primary" onclick="saveMember()">
-            💾 Save Member
+            💾 Saqlaw
           </button>
         </div>
       </div>
     </div>
 
-    <!-- BORROWING MODAL -->
     <div class="modal-overlay" id="borrowing-modal">
       <div class="modal">
         <div class="modal-header">
-          <div class="modal-title" id="borrowing-modal-title">
-            New Borrowing
-          </div>
+          <div class="modal-title" id="borrowing-modal-title">Jańa jazba</div>
           <button class="modal-close" onclick="closeModal('borrowing-modal')">
             ✕
           </button>
         </div>
         <input type="hidden" id="borrowing-id" />
         <div class="form-group">
-          <label>Book *</label>
+          <label>Kitap *</label>
           <select id="borrowing-book">
-            <option value="">Select a book…</option>
+            <option value="">Kitaptı tańlań…</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Member *</label>
+          <label>Aǵza *</label>
           <select id="borrowing-member">
-            <option value="">Select a member…</option>
+            <option value="">Aǵzanı tańlań…</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Borrow Date *</label>
+          <label>Alınǵan kúni *</label>
           <input type="date" id="borrowing-date" />
         </div>
         <div class="form-group">
-          <label>Return Date</label>
+          <label>Tapsırıw kúni</label>
           <input type="date" id="borrowing-return" />
         </div>
         <div class="form-footer">
           <button class="btn btn-ghost" onclick="closeModal('borrowing-modal')">
-            Cancel
+            Biykar etiw
           </button>
           <button class="btn btn-primary" onclick="saveBorrowing()">
-            💾 Save Record
+            💾 Saqlaw
           </button>
         </div>
       </div>
     </div>
 
-    <!-- REVIEW MODAL -->
     <div class="modal-overlay" id="review-modal">
       <div class="modal">
         <div class="modal-header">
-          <div class="modal-title" id="review-modal-title">Add Review</div>
+          <div class="modal-title" id="review-modal-title">Pikir qosıw</div>
           <button class="modal-close" onclick="closeModal('review-modal')">
             ✕
           </button>
         </div>
         <input type="hidden" id="review-id" />
         <div class="form-group">
-          <label>Book *</label>
+          <label>Kitap *</label>
           <select id="review-book">
-            <option value="">Select a book…</option>
+            <option value="">Kitaptı tańlań…</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Member *</label>
+          <label>Aǵza *</label>
           <select id="review-member">
-            <option value="">Select a member…</option>
+            <option value="">Aǵzanı tańlań…</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Rating (1–5) *</label>
+          <label>Reyting (1–5) *</label>
           <select id="review-rating">
-            <option value="5">⭐⭐⭐⭐⭐ — Excellent</option>
-            <option value="4">⭐⭐⭐⭐ — Good</option>
-            <option value="3">⭐⭐⭐ — Average</option>
-            <option value="2">⭐⭐ — Poor</option>
-            <option value="1">⭐ — Terrible</option>
+            <option value="5">⭐⭐⭐⭐⭐ — Júda jaqsı</option>
+            <option value="4">⭐⭐⭐⭐ — Jaqsı</option>
+            <option value="3">⭐⭐⭐ — Orta</option>
+            <option value="2">⭐⭐ — Jaman</option>
+            <option value="1">⭐ — Júda jaman</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Review Text</label>
+          <label>Pikir teksti</label>
           <textarea
             id="review-text"
             rows="3"
-            placeholder="Write your review…"
+            placeholder="Pikirlerin'izdi jazin'…"
           ></textarea>
         </div>
         <div class="form-footer">
           <button class="btn btn-ghost" onclick="closeModal('review-modal')">
-            Cancel
+            Biykar etiw
           </button>
           <button class="btn btn-primary" onclick="saveReview()">
-            💾 Save Review
+            💾 Saqlaw
           </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- STAFF MODAL -->
-    <div class="modal-overlay" id="staff-modal">
-      <div class="modal">
-        <div class="modal-header">
-          <div class="modal-title" id="staff-modal-title">Add Staff Member</div>
-          <button class="modal-close" onclick="closeModal('staff-modal')">
-            ✕
-          </button>
-        </div>
-        <input type="hidden" id="staff-id" />
-        <div class="form-group">
-          <label>Name *</label>
-          <input type="text" id="staff-name" placeholder="Full name" />
-        </div>
-        <div class="form-group">
-          <label>Role / Position *</label>
-          <input
-            type="text"
-            id="staff-role"
-            placeholder="e.g. Librarian, Manager"
-          />
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            id="staff-email"
-            placeholder="email@example.com"
-          />
-        </div>
-        <div class="form-footer">
-          <button class="btn btn-ghost" onclick="closeModal('staff-modal')">
-            Cancel
-          </button>
-          <button class="btn btn-primary" onclick="saveStaff()">
-            💾 Save Staff
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- CONFIRM DELETE -->
-    <div class="modal-overlay" id="confirm-modal">
-      <div class="modal">
-        <div class="confirm-icon">🗑️</div>
-        <div class="confirm-title">Delete Record</div>
-        <div class="confirm-text">
-          Are you sure? This action cannot be undone.
-        </div>
-        <div class="form-footer" style="justify-content: center">
-          <button class="btn btn-ghost" onclick="closeModal('confirm-modal')">
-            Cancel
-          </button>
-          <button class="btn btn-danger" id="confirm-delete-btn">Delete</button>
         </div>
       </div>
     </div>
