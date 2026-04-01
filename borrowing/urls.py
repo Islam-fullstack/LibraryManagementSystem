@@ -9,6 +9,4 @@ router.register('borrowings', BorrowingViewSet)
 urlpatterns = [
     path('api/', include(router.urls)), 
     path('list/', borrowing_list, name='borrowings-list'),
-
-
 ]
