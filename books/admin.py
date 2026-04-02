@@ -21,3 +21,7 @@ class GenreAdmin(admin.ModelAdmin):
 class PublisherAdmin(admin.ModelAdmin):
     list_display = ('name', 'website', 'email')
     search_fields = ('name',)
+
+admin.site.site_header = "Kitapxana Basqarıw Sisteması"
+admin.site.site_title = "Kitapxana Admin Paneli"
+admin.site.index_title = "Sistemani Basqarıw"
