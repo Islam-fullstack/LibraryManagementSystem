@@ -7,6 +7,8 @@ from .serializers import AuthorSerializer, BookSerializer, GenreSerializer, Publ
 def home(request):
     return render(request, 'reviews/index.html')   # ← fixed template path
 
+def intro(request):
+    return render(request, 'reviews/libraryms-intro.html')
 
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()

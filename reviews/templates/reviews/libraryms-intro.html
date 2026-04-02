@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="kaa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LibraryMS — Kitapxana Basqarıw Sisteması</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0c10;
+      --surface: #12151c;
+      --surface2: #1a1e28;
+      --border: #242836;
+      --accent: #c9a84c;
+      --accent2: #e8c87a;
+      --accent3: #f0d89a;
+      --text: #ede9e0;
+      --text-muted: #7a8094;
+      --text-dim: #4a5068;
+      --success: #5cb87a;
+      --info: #5c9be0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(10,12,16,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .nav-brand {
+      font-family: "Playfair Display", serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent);
+      color: #0a0c10;
+      border: none;
+      border-radius: 6px;
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.55rem 1.4rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--accent2);
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      overflow: hidden;
+    }
+
+    /* radial glow */
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 900px;
+      height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 65%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    /* floating orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.15;
+      filter: blur(60px);
+      animation: drift 14s ease-in-out infinite;
+    }
+    .orb-1 { width: 400px; height: 400px; background: var(--accent); top: 10%; left: -10%; animation-duration: 18s; }
+    .orb-2 { width: 300px; height: 300px; background: var(--info); top: 60%; right: -5%; animation-duration: 14s; animation-delay: -6s; }
+    .orb-3 { width: 250px; height: 250px; background: var(--success); bottom: 10%; left: 30%; animation-duration: 16s; animation-delay: -3s; }
+    @keyframes drift {
+      0%, 100% { transform: translate(0, 0); }
+      33% { transform: translate(30px, -20px); }
+      66% { transform: translate(-20px, 30px); }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--accent2);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.1rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent3) 0%, var(--accent) 60%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      animation: fadeUp 0.8s 0.25s ease both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.35s ease both;
+    }
+    .btn-hero-primary {
+      background: var(--accent);
+      color: #0a0c10;
+      border: none;
+      border-radius: 8px;
+      font-family: "DM Sans", sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.85rem 2.2rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s;
+      box-shadow: 0 0 30px rgba(201,168,76,0.25);
+    }
+    .btn-hero-primary:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px rgba(201,168,76,0.4);
+    }
+    .btn-hero-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: "DM Sans", sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.85rem 2.2rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s;
+    }
+    .btn-hero-ghost:hover {
+      color: var(--text);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: fadeUp 1s 0.6s ease both;
+    }
+    .scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 1.5px solid var(--text-dim);
+      border-bottom: 1.5px solid var(--text-dim);
+      transform: rotate(45deg);
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50% { transform: rotate(45deg) translateY(5px); }
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      position: relative;
+      z-index: 1;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+    }
+    .stat-item {
+      flex: 1;
+      max-width: 220px;
+      text-align: center;
+      padding: 0 2rem;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: "Playfair Display", serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .stat-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 2rem;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+    }
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      max-width: 580px;
+    }
+
+    /* ── FEATURES ── */
+    .features-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 4rem;
+    }
+    .features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .feature-item {
+      display: flex;
+      gap: 1.25rem;
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: all 0.25s;
+      cursor: default;
+    }
+    .feature-item:hover {
+      border-color: var(--accent);
+      background: var(--surface2);
+      transform: translateX(4px);
+    }
+    .feature-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      background: rgba(201,168,76,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .feature-content h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .feature-content p {
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .features-visual {
+      position: sticky;
+      top: 6rem;
+    }
+    .mock-app {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+    .mock-topbar {
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .mock-dots { display: flex; gap: 6px; }
+    .mock-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+    .mock-dot:nth-child(1) { background: #e05c5c; }
+    .mock-dot:nth-child(2) { background: var(--accent); }
+    .mock-dot:nth-child(3) { background: var(--success); }
+    .mock-title {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .mock-body { padding: 1.25rem; }
+    .mock-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 0.9rem;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      font-size: 0.82rem;
+      animation: shimmerIn 0.5s ease both;
+    }
+    .mock-row:nth-child(2) { animation-delay: 0.1s; }
+    .mock-row:nth-child(3) { animation-delay: 0.2s; }
+    .mock-row:nth-child(4) { animation-delay: 0.3s; }
+    .mock-row:nth-child(5) { animation-delay: 0.4s; }
+    @keyframes shimmerIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .mock-tag {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .tag-gold { background: rgba(201,168,76,0.2); color: var(--accent); }
+    .tag-green { background: rgba(92,184,122,0.2); color: var(--success); }
+    .tag-blue { background: rgba(92,155,224,0.2); color: var(--info); }
+
+    /* ── HOW IT WORKS ── */
+    #how { background: var(--surface); }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    .step-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s;
+    }
+    .step-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .step-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .step-card:hover::before { opacity: 1; }
+    .step-number {
+      font-family: "Playfair Display", serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .step-card:hover .step-number { color: rgba(201,168,76,0.25); }
+    .step-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+    .step-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .step-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── MODULES ── */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 3.5rem;
+    }
+    .module-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .module-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      background: radial-gradient(circle at top left, rgba(201,168,76,0.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .module-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+    .module-card:hover::after { opacity: 1; }
+    .module-emoji { font-size: 2.5rem; margin-bottom: 1.25rem; }
+    .module-card h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+    .module-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+    .module-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .mtag {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    /* ── LOGIN GUIDE ── */
+    #login-guide { background: var(--surface); }
+    .login-guide-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .login-visual {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2.5rem 2rem;
+      max-width: 380px;
+    }
+    .lv-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .lv-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .lv-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+    .lv-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
+    .lv-field {
+      margin-bottom: 1rem;
+    }
+    .lv-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+    .lv-input {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 0.65rem 1rem;
+      font-size: 0.88rem;
+      color: var(--text);
+      width: 100%;
+    }
+    .lv-input.highlight { border-color: var(--accent); }
+    .lv-btn {
+      width: 100%;
+      background: var(--accent);
+      color: #0a0c10;
+      border: none;
+      border-radius: 7px;
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      cursor: pointer;
+    }
+    .tip-box {
+      background: rgba(201,168,76,0.07);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      color: var(--accent2);
+      line-height: 1.55;
+    }
+    .login-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .login-step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .ls-num {
+      width: 36px;
+      height: 36px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      color: var(--accent);
+      font-family: "Playfair Display", serif;
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .ls-body h4 {
+      font-size: 0.97rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .ls-body p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    code {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1rem 0.4rem;
+      font-size: 0.82rem;
+      color: var(--accent2);
+      font-family: monospace;
+    }
+
+    /* ── FAQ ── */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 3rem;
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .faq-q {
+      padding: 1.2rem 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.97rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      user-select: none;
+    }
+    .faq-q:hover { color: var(--accent); }
+    .faq-q.open { color: var(--accent); }
+    .faq-icon {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+      color: var(--text-muted);
+    }
+    .faq-q.open .faq-icon { transform: rotate(45deg); color: var(--accent); border-color: var(--accent); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0 1.5rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      border-top: 0px solid var(--border);
+    }
+    .faq-a.open {
+      max-height: 300px;
+      padding: 1rem 1.5rem 1.25rem;
+      border-top-width: 1px;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center;
+      padding: 8rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 65%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 900;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+    .cta-section p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+    .footer-brand {
+      font-family: "Playfair Display", serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .features-layout, .login-guide-wrap { grid-template-columns: 1fr; gap: 2rem; }
+      .features-visual { position: static; }
+      .stats-bar { flex-wrap: wrap; gap: 1.5rem; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 1rem; }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 4rem 1.25rem; }
+      .hero { padding-top: 6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-brand" href="#">📚 LibraryMS</a>
+    <ul class="nav-links">
+      <li><a href="#features">Múmkinshilikler</a></li>
+      <li><a href="#how">Qanday islew kerek</a></li>
+      <li><a href="#modules">Moduller</a></li>
+      <li><a href="#faq">Sorawlar</a></li>
+    </ul>
+    <a class="nav-cta" href="https://librarymanagementsystem-ev7o.onrender.com" target="_blank">🔓 Sistemaga kirıw</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">📚 Kitapxana Basqarıw Sisteması</div>
+      <h1 class="hero-title">
+        <span>LibraryMS</span> —<br>kitapxanaıńızdı<br>aqıllı basqarıń
+      </h1>
+      <p class="hero-sub">
+        Kitaplar, aǵzalar, alıp-beriw jazbaları hám pikirler — bárshi nárse bir jerde, 
+        qolaylı interfeys arqalı. Kitapxananızda tártip ornatıwdıń eń jeńil jolı.
+      </p>
+      <div class="hero-btns">
+        <a class="btn-hero-primary" href="#how">▶ Qanday islew kerek</a>
+        <a class="btn-hero-ghost" href="#modules">Modullerdi kóriw →</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Tómen qaraŋ</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-desc">Basqı Modul</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-desc">Web-bazalı</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">∞</div>
+      <div class="stat-desc">Kitap qosıw</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">24/7</div>
+      <div class="stat-desc">Onlayn isleydi</div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-eyebrow">Múmkinshilikler</div>
+        <h2 class="section-title">Kitapxananızda neni<br>basqara alasız?</h2>
+        <p class="section-desc">LibraryMS kitapxana islerine kerek bolan barlıq qurallardı bir platformada jıynastırǵan zamanagóy sistema.</p>
+      </div>
+      <div class="features-layout">
+        <div class="features-list reveal">
+          <div class="feature-item">
+            <div class="feature-icon">📖</div>
+            <div class="feature-content">
+              <h3>Kitap katalogı</h3>
+              <p>Kitaplarıńızdı qosıń, ózgertiń, avtor hám baspa xanası boyınsha retleń. Qansha nusqa bar ekenin baqlaŋ.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">👥</div>
+            <div class="feature-content">
+              <h3>Aǵzalar bazası</h3>
+              <p>Kitapxana aǵzalarınıń tizimin kóriń. Olar kim, qanday rol atqaradı — barlıǵı bir jerden.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🔄</div>
+            <div class="feature-content">
+              <h3>Alıw-beriw jazbaları</h3>
+              <p>Kim qaysı kitaptı alǵanın, qashan tapsırıwı kerekligin anıq kóriń. Keyin qaytarılǵan jazbaları hám baqlaŋ.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">⭐</div>
+            <div class="feature-content">
+              <h3>Pikir hám reytinglar</h3>
+              <p>Aǵzalar kitaplar haqqında 1-5 yuldız reyting hám pikir qaldıra aladı. Qaysı kitaplar eń jas?</p>
+            </div>
+          </div>
+        </div>
+        <div class="features-visual reveal">
+          <div class="mock-app">
+            <div class="mock-topbar">
+              <div class="mock-dots">
+                <div class="mock-dot"></div>
+                <div class="mock-dot"></div>
+                <div class="mock-dot"></div>
+              </div>
+              <div class="mock-title">📚 LibraryMS — Kitaplar</div>
+            </div>
+            <div class="mock-body">
+              <div class="mock-row">
+                <span><strong>Don Quijote</strong> · Servantes</span>
+                <span class="mock-tag tag-gold">3 nusqa</span>
+              </div>
+              <div class="mock-row">
+                <span><strong>Alpamıs Batır</strong> · Xalıq eposi</span>
+                <span class="mock-tag tag-green">5 nusqa</span>
+              </div>
+              <div class="mock-row">
+                <span><strong>Berdaqlıq</strong> · Berdax</span>
+                <span class="mock-tag tag-gold">2 nusqa</span>
+              </div>
+              <div class="mock-row">
+                <span><strong>Sherlock Holmes</strong> · Doyle</span>
+                <span class="mock-tag tag-blue">Alındı</span>
+              </div>
+              <div class="mock-row">
+                <span><strong>Ajayıp Seyilgah</strong> · Nızamiy</span>
+                <span class="mock-tag tag-green">7 nusqa</span>
+              </div>
+            </div>
+          </div>
+          <div class="tip-box">
+            💡 <strong>Qolaylı izlew:</strong> Kitap atı, avtor yamasa baspa xanası boyınsha tez izleń — nátiyjeler tekwaqıt kórineberedi.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="container">
+      <div class="reveal" style="text-align:center;">
+        <div class="section-eyebrow">Qanday isleydi</div>
+        <h2 class="section-title">Baslawǵa tek tórt qadam</h2>
+        <p class="section-desc" style="margin: 0 auto 0;">Sistemadan paydalanıw júda jeńil. Hesh qanday texnikalıq bilim kerek emes.</p>
+      </div>
+      <div class="steps-grid reveal">
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <div class="step-icon">🔑</div>
+          <h3>Sistemaga kiriń</h3>
+          <p>Emailıńızdı hám telefon nomerińizdi kiritiń. Parolıńız — tel. nomerińiz.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <div class="step-icon">🏠</div>
+          <h3>Bas bettı kóriń</h3>
+          <p>Kitaplar, aǵzalar hám alınǵan kitaplar sanı — barlıq statistika bir jerde.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <div class="step-icon">📋</div>
+          <h3>Modullerge ótiń</h3>
+          <p>Joqarıdaǵı meniyuden Kitaplar, Aǵzalar, Alınǵanlar yamasa Pikirler bólimine kiriń.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">04</div>
+          <div class="step-icon">✅</div>
+          <h3>Jaqław-ózgertiw</h3>
+          <p>"+ Qosıw" túymesi arqalı jazbalar qosıń, qalamsha belgisi menen ózgertiń yamasa óshiriń.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULES -->
+  <section id="modules">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-eyebrow">Moduller</div>
+        <h2 class="section-title">Sistemanıń bólimlerine<br>toqtap óteyik</h2>
+        <p class="section-desc">Hár bir bólim neni ámellestiredi hám qanday peydalanıw kerek.</p>
+      </div>
+      <div class="modules-grid reveal">
+
+        <div class="module-card">
+          <div class="module-emoji">🏠</div>
+          <h3>Bas Bet</h3>
+          <p>Sistemaga kirgennen keyin dáslepki kórinetuǵın bet. Kitaplar, aǵzalar hám alınǵan kitaplar sanı tezlik penen kórsetiledi. Tórt tiykarǵı modulge tez kiriwge qolaylı bólimler bar.</p>
+          <div class="module-tags">
+            <span class="mtag">Statistika</span>
+            <span class="mtag">Tez kirıw</span>
+            <span class="mtag">Shólkemlestirilgen</span>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="module-emoji">📖</div>
+          <h3>Kitaplar</h3>
+          <p>Kitapxanaıńızdaǵı barlıq kitaplardı basqarıŋ. Jańa kitap qosıwda avtor, janr, baspa xanası, ISBN, sánesi hám nusqalar sanı kiritiliwi múmkin. Izlew arqalı tez tabıw jetkilikli.</p>
+          <div class="module-tags">
+            <span class="mtag">Qosıw</span>
+            <span class="mtag">Ózgertiw</span>
+            <span class="mtag">Óshiriw</span>
+            <span class="mtag">Izlew</span>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="module-emoji">👥</div>
+          <h3>Aǵzalar</h3>
+          <p>Kitapxanadan paydalanıp atırǵan barlıq aǵzalardı kóriń. Olardıń atı, email, telefon nomeri hám rolı kórsetiledi. Bul bólimde tек kóriw múmkin, ózgertiw adminlarga berilgen.</p>
+          <div class="module-tags">
+            <span class="mtag">Kóriw</span>
+            <span class="mtag">Izlew</span>
+            <span class="mtag">Rol tizimi</span>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="module-emoji">🔄</div>
+          <h3>Alınǵan Kitaplar</h3>
+          <p>Qaysı aǵza qaysı kitaptı qawshan alǵanın hám qawshan qaytaratıǵın baqlaŋ. "Aktiv" hám "Tapsırıldı" statusleri arqalı jaǵdaydı anıq kóresiz. Jańa jazba qosıw hám ózgertiw jetkilikli.</p>
+          <div class="module-tags">
+            <span class="mtag">Status baqlawı</span>
+            <span class="mtag">Sáne belgisi</span>
+            <span class="mtag">Qosıw / Ózgertiw</span>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="module-emoji">⭐</div>
+          <h3>Pikirler</h3>
+          <p>Kitapxana aǵzaları kitaplardı oqıp bolıp, pikir qaldıra aladı. 1 den 5 ke shekem yuldız reyting hám matn pikirleri. Pikir kartlar tósegin kórsetiledí.</p>
+          <div class="module-tags">
+            <span class="mtag">Reyting</span>
+            <span class="mtag">Matn pikir</span>
+            <span class="mtag">Qosıw / Óshiriw</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGIN GUIDE -->
+  <section id="login-guide">
+    <div class="container">
+      <div class="login-guide-wrap">
+        <div class="reveal">
+          <div class="section-eyebrow">Kiriw Nusqawı</div>
+          <h2 class="section-title">Sistemaga qanday<br>kiriwge boladı?</h2>
+          <div class="login-steps">
+            <div class="login-step">
+              <div class="ls-num">1</div>
+              <div class="ls-body">
+                <h4>Kitapxana aǵzası bolıń</h4>
+                <p>Sistema faqat kitapxana tólimiyle dizimge alınǵan aǵzalarǵa ashıq. Aǵzalıq haqqında admin menen baylanısıń.</p>
+              </div>
+            </div>
+            <div class="login-step">
+              <div class="ls-num">2</div>
+              <div class="ls-body">
+                <h4>Email mańzilin kiritiń</h4>
+                <p>Sizde tizimge alıw waqtında berилgen emaildı kiritiń, мısalı: <code>ism@email.com</code></p>
+              </div>
+            </div>
+            <div class="login-step">
+              <div class="ls-num">3</div>
+              <div class="ls-body">
+                <h4>Parol — telefon nomeri</h4>
+                <p>Parol retinde <code>telefon nomeriňizdi</code> kiritiń (registratsiya waqtında qollanıwǵan). Mısalı: <code>+998901234567</code></p>
+              </div>
+            </div>
+            <div class="login-step">
+              <div class="ls-num">4</div>
+              <div class="ls-body">
+                <h4>"Kirіw" túymesín basıń</h4>
+                <p>Maǵlıwmatlar durıs bolsa, sistemaga kirip, Bas betke ótesiz. Qiynalgan jaǵdayda adminisge xabar beriń.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="login-visual reveal">
+          <div class="lv-header">
+            <div class="lv-icon">📚</div>
+            <div class="lv-title">LibraryMS</div>
+            <div class="lv-sub">Kitapxana Basqarıw Sisteması</div>
+          </div>
+          <div class="lv-field">
+            <div class="lv-label">Email</div>
+            <div class="lv-input">aǵza@email.com</div>
+          </div>
+          <div class="lv-field">
+            <div class="lv-label">Parol (telefon nomeri)</div>
+            <div class="lv-input highlight">+998 90 123 45 67</div>
+          </div>
+          <button class="lv-btn">🔓 Kirіw</button>
+          <div class="tip-box">
+            ⚠️ <strong>Eslatpe:</strong> Egerde email yamasa parolda qátelik bolsa, adminisge xabar beriń — olar sizge kiriw maǵlıwmatların berisedi.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="reveal" style="text-align:center;">
+        <div class="section-eyebrow">Kóp Soraladı</div>
+        <h2 class="section-title">Sorawlar hám jawaplar</h2>
+      </div>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Sistemaga qanday kiriwge boladı?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            Emailıńızdı hám telefon nomerińizdi kiritiń. Parolıńız — kitapxana dizemine alıw waqtında belgilengen telefon nomeri. Qiynalǵan jaǵdayda kitapxana adminisge xabar beriń.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Kitap qosıw ushın ne kerek?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            "Kitaplar" bólimine kirip, "＋ Kitap qosıw" túymesın basıń. Kitap ataması, ISBN, basılǵan sánesi mіndетtі bólip tabıladı. Avtor, janr hám baspa xanasın da kórsetsenizboldı.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Alınǵan kitap qaytarılǵanda ne islewim kerek?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            "Alınǵan kitaplar" bólimine kiriń, tiyisli jazbanı tabıń hám "✏️ Ózgertiw" túymesın basıń. "Tapsırıw kúni" maydanına házirgı sáneni kiritiń hám saqlań. Status avtomatik "Tapsırıldı" dep ózgeredi.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Aǵzalar bólimine qosıw yamasa ózgertiw múmkinbe?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            Joq, aǵzalar bóliminde faqat kóriw múmkin. Aǵzalardı qosıw, ózgertiw yamasa óshiriw faqat sistema admini arqalı ámellestiriliwi múmkin. Bul sistema qáwipsizligi ushın belgilengen.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Pikir qaldırıw ushın qanday shártler bar?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            "Pikirler" bólimine kirip, "＋ Pikir qosıw" túymesın basıń. Kitaptı hám aǵzanı tańlaŋ, reyting beriń (1-5 yuldız) hám pikir tekstin jazıń. Pikir teksti міndетtі emes.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Sistema qaysi qurilmalarda isledi?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            LibraryMS barlıq zamanagóy brauzerlerde isleydi: Chrome, Firefox, Safari, Edge. Telefon, planshet hám kompyuterden paydalanıwǵa múmkin — arnawlı programma ornatıw shárt emes.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-glow"></div>
+    <div class="reveal" style="position:relative;">
+      <h2>Kitapxanaıńızdı<br><span style="color:var(--accent)">hازір basqarıń</span></h2>
+      <p>Tizimde bar bolsańız, sistemaga kirip kitaplar hám alıw-beriw jazbalarınızdı basqarıwdı baslań.</p>
+      <a class="btn-hero-primary" href="https://librarymanagementsystem-ev7o.onrender.com" target="_blank">
+        📚 LibraryMS-ke Kiriw →
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">📚 LibraryMS</div>
+    <div class="footer-copy">Kitapxana Basqarıw Sisteması · Barlıq huqıqlar qorıǵan</div>
+  </footer>
+
+  <script>
+    // FAQ toggle
+    function toggleFaq(el) {
+      const isOpen = el.classList.contains('open');
+      document.querySelectorAll('.faq-q.open').forEach(q => {
+        q.classList.remove('open');
+        q.nextElementSibling.classList.remove('open');
+      });
+      if (!isOpen) {
+        el.classList.add('open');
+        el.nextElementSibling.classList.add('open');
+      }
+    }
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
