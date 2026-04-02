@@ -24,7 +24,11 @@
         --radius: 10px;
         --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
       }
-      * { box-sizing: border-box; margin: 0; padding: 0; }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
       body {
         font-family: "DM Sans", sans-serif;
         background: var(--bg);
@@ -34,9 +38,6 @@
         flex-direction: column;
       }
 
-      /* ══════════════════════════════════
-         LOGIN SCREEN
-      ══════════════════════════════════ */
       #login-screen {
         display: flex;
         align-items: center;
@@ -47,11 +48,17 @@
         overflow: hidden;
       }
       #login-screen::before {
-        content: '';
+        content: "";
         position: absolute;
-        width: 600px; height: 600px;
-        background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
-        top: 50%; left: 50%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(201, 168, 76, 0.08) 0%,
+          transparent 70%
+        );
+        top: 50%;
+        left: 50%;
         transform: translate(-50%, -50%);
         pointer-events: none;
       }
@@ -111,7 +118,9 @@
         outline: none;
         transition: border-color 0.2s;
       }
-      .login-card input:focus { border-color: var(--accent); }
+      .login-card input:focus {
+        border-color: var(--accent);
+      }
       .login-btn {
         width: 100%;
         margin-top: 1.5rem;
@@ -130,8 +139,15 @@
         justify-content: center;
         gap: 0.5rem;
       }
-      .login-btn:hover { background: var(--accent2); transform: translateY(-1px); }
-      .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+      .login-btn:hover {
+        background: var(--accent2);
+        transform: translateY(-1px);
+      }
+      .login-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
       .login-error {
         background: rgba(224, 92, 92, 0.1);
         border: 1px solid var(--danger);
@@ -143,13 +159,18 @@
         display: none;
         text-align: center;
       }
-      .login-error.show { display: block; }
+      .login-error.show {
+        display: block;
+      }
 
-      /* ══════════════════════════════════
-         MAIN APP (hidden until logged in)
-      ══════════════════════════════════ */
-      #app { display: none; flex-direction: column; min-height: 100vh; }
-      #app.visible { display: flex; }
+      #app {
+        display: none;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      #app.visible {
+        display: flex;
+      }
 
       nav {
         background: var(--surface);
@@ -190,7 +211,8 @@
         align-items: center;
         gap: 0.4rem;
       }
-      .nav-links a:hover, .nav-links a.active {
+      .nav-links a:hover,
+      .nav-links a.active {
         color: var(--accent);
         background: rgba(201, 168, 76, 0.1);
       }
@@ -204,7 +226,9 @@
         font-size: 0.85rem;
         color: var(--text-muted);
       }
-      .nav-user-name strong { color: var(--accent); }
+      .nav-user-name strong {
+        color: var(--accent);
+      }
       .btn-logout {
         background: transparent;
         border: 1px solid var(--border);
@@ -220,7 +244,10 @@
         align-items: center;
         gap: 0.35rem;
       }
-      .btn-logout:hover { color: var(--danger); border-color: var(--danger); }
+      .btn-logout:hover {
+        color: var(--danger);
+        border-color: var(--danger);
+      }
 
       main {
         flex: 1;
@@ -229,19 +256,38 @@
         margin: 0 auto;
         width: 100%;
       }
-      .page { display: none; animation: fadeIn 0.3s ease; }
-      .page.active { display: block; }
+      .page {
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+      .page.active {
+        display: block;
+      }
       @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(12px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
       @keyframes slideUp {
-        from { transform: translateY(24px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
+        from {
+          transform: translateY(24px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
       }
 
-      /* HERO */
-      .hero { text-align: center; padding: 4rem 1rem 3rem; }
+      .hero {
+        text-align: center;
+        padding: 4rem 1rem 3rem;
+      }
       .hero-badge {
         display: inline-block;
         background: rgba(201, 168, 76, 0.15);
@@ -261,117 +307,484 @@
         font-weight: 900;
         line-height: 1.1;
         margin-bottom: 1.2rem;
-        background: linear-gradient(135deg, var(--text) 0%, var(--accent2) 100%);
+        background: linear-gradient(
+          135deg,
+          var(--text) 0%,
+          var(--accent2) 100%
+        );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
-      .hero p { color: var(--text-muted); font-size: 1.05rem; max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.7; }
-      .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 600px; margin: 2.5rem auto 0; }
-      .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem 1rem; text-align: center; transition: border-color 0.2s; }
-      .stat-card:hover { border-color: var(--accent); }
-      .stat-number { font-family: "Playfair Display", serif; font-size: 2rem; font-weight: 700; color: var(--accent); }
-      .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.08em; }
-      .quick-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
-      .quick-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; cursor: pointer; transition: all 0.2s; text-align: left; }
-      .quick-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
-      .quick-card-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
-      .quick-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
-      .quick-card p { font-size: 0.82rem; color: var(--text-muted); }
+      .hero p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        max-width: 560px;
+        margin: 0 auto 2.5rem;
+        line-height: 1.7;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        max-width: 600px;
+        margin: 2.5rem auto 0;
+      }
+      .stat-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem 1rem;
+        text-align: center;
+        transition: border-color 0.2s;
+      }
+      .stat-card:hover {
+        border-color: var(--accent);
+      }
+      .stat-number {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      .stat-label {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-top: 0.25rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 2.5rem;
+      }
+      .quick-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: left;
+      }
+      .quick-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow);
+      }
+      .quick-card-icon {
+        font-size: 1.8rem;
+        margin-bottom: 0.75rem;
+      }
+      .quick-card h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+      }
+      .quick-card p {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+      }
 
-      /* SECTION */
-      .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
-      .section-header h2 { font-family: "Playfair Display", serif; font-size: 1.6rem; font-weight: 700; }
-      .section-actions { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
-      .search-input { background: var(--surface2); border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 0.5rem 1rem; font-size: 0.9rem; width: 220px; outline: none; transition: border-color 0.2s; }
-      .search-input::placeholder { color: var(--text-muted); }
-      .search-input:focus { border-color: var(--accent); }
+      .section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .section-header h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+      }
+      .section-actions {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .search-input {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        border-radius: 6px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        width: 220px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .search-input::placeholder {
+        color: var(--text-muted);
+      }
+      .search-input:focus {
+        border-color: var(--accent);
+      }
 
-      /* BUTTONS */
-      .btn { border: none; border-radius: 6px; font-family: "DM Sans", sans-serif; font-size: 0.88rem; font-weight: 500; cursor: pointer; padding: 0.55rem 1.2rem; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; }
-      .btn-primary { background: var(--accent); color: #0d0f14; }
-      .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
-      .btn-danger { background: var(--danger); color: #fff; }
-      .btn-danger:hover { background: #c94a4a; }
-      .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
-      .btn-ghost:hover { color: var(--text); border-color: var(--text-muted); }
-      .btn-sm { padding: 0.35rem 0.75rem; font-size: 0.8rem; }
-      .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+      .btn {
+        border: none;
+        border-radius: 6px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.88rem;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 0.55rem 1.2rem;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        text-decoration: none;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #0d0f14;
+      }
+      .btn-primary:hover {
+        background: var(--accent2);
+        transform: translateY(-1px);
+      }
+      .btn-danger {
+        background: var(--danger);
+        color: #fff;
+      }
+      .btn-danger:hover {
+        background: #c94a4a;
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--text-muted);
+        border: 1px solid var(--border);
+      }
+      .btn-ghost:hover {
+        color: var(--text);
+        border-color: var(--text-muted);
+      }
+      .btn-sm {
+        padding: 0.35rem 0.75rem;
+        font-size: 0.8rem;
+      }
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none !important;
+      }
 
-      /* TABLE */
-      .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-      table { width: 100%; border-collapse: collapse; }
-      thead th { background: var(--surface2); padding: 0.85rem 1.1rem; text-align: left; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); border-bottom: 1px solid var(--border); }
-      tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
-      tbody tr:last-child { border-bottom: none; }
-      tbody tr:hover { background: var(--surface2); }
-      td { padding: 0.85rem 1.1rem; font-size: 0.9rem; vertical-align: middle; }
-      .td-actions { display: flex; gap: 0.5rem; }
-      .empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
-      .empty-state .empty-icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.5; }
-      .empty-state p { font-size: 0.95rem; }
-      .loading { text-align: center; padding: 3rem; color: var(--text-muted); }
-      .spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 1rem; }
-      @keyframes spin { to { transform: rotate(360deg); } }
+      .table-wrap {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      thead th {
+        background: var(--surface2);
+        padding: 0.85rem 1.1rem;
+        text-align: left;
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border);
+      }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:last-child {
+        border-bottom: none;
+      }
+      tbody tr:hover {
+        background: var(--surface2);
+      }
+      td {
+        padding: 0.85rem 1.1rem;
+        font-size: 0.9rem;
+        vertical-align: middle;
+      }
+      .td-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--text-muted);
+      }
+      .empty-state .empty-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+      }
+      .empty-state p {
+        font-size: 0.95rem;
+      }
+      .loading {
+        text-align: center;
+        padding: 3rem;
+        color: var(--text-muted);
+      }
+      .spinner {
+        width: 32px;
+        height: 32px;
+        border: 3px solid var(--border);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        margin: 0 auto 1rem;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
-      /* MODAL */
-      .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; align-items: center; justify-content: center; padding: 1rem; backdrop-filter: blur(4px); }
-      .modal-overlay.open { display: flex; }
-      .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; width: 100%; max-width: 480px; animation: slideUp 0.25s ease; max-height: 90vh; overflow-y: auto; }
-      .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-      .modal-title { font-family: "Playfair Display", serif; font-size: 1.3rem; font-weight: 700; }
-      .modal-close { background: none; border: none; color: var(--text-muted); font-size: 1.4rem; cursor: pointer; line-height: 1; transition: color 0.2s; }
-      .modal-close:hover { color: var(--text); }
-      .form-group { margin-bottom: 1.1rem; }
-      label { display: block; font-size: 0.82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 0.4rem; }
-      input, select, textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-family: "DM Sans", sans-serif; font-size: 0.92rem; padding: 0.6rem 0.9rem; outline: none; transition: border-color 0.2s; }
-      input:focus, select:focus, textarea:focus { border-color: var(--accent); }
-      select option { background: var(--surface2); }
-      .form-footer { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem; }
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 200;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        backdrop-filter: blur(4px);
+      }
+      .modal-overlay.open {
+        display: flex;
+      }
+      .modal {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 2rem;
+        width: 100%;
+        max-width: 480px;
+        animation: slideUp 0.25s ease;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+      .modal-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+      }
+      .modal-close {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        font-size: 1.4rem;
+        cursor: pointer;
+        line-height: 1;
+        transition: color 0.2s;
+      }
+      .modal-close:hover {
+        color: var(--text);
+      }
+      .form-group {
+        margin-bottom: 1.1rem;
+      }
+      label {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--text-muted);
+        margin-bottom: 0.4rem;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.92rem;
+        padding: 0.6rem 0.9rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: var(--accent);
+      }
+      select option {
+        background: var(--surface2);
+      }
+      .form-footer {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: flex-end;
+        margin-top: 1.5rem;
+      }
 
-      /* TOAST */
-      #toast-container { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; display: flex; flex-direction: column; gap: 0.5rem; }
-      .toast { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1.2rem; font-size: 0.88rem; min-width: 260px; animation: toastIn 0.25s ease; display: flex; align-items: center; gap: 0.6rem; box-shadow: var(--shadow); }
-      .toast.success { border-color: var(--success); }
-      .toast.error { border-color: var(--danger); }
-      @keyframes toastIn { from { transform: translateX(40px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+      #toast-container {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .toast {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.85rem 1.2rem;
+        font-size: 0.88rem;
+        min-width: 260px;
+        animation: toastIn 0.25s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        box-shadow: var(--shadow);
+      }
+      .toast.success {
+        border-color: var(--success);
+      }
+      .toast.error {
+        border-color: var(--danger);
+      }
+      @keyframes toastIn {
+        from {
+          transform: translateX(40px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
 
-      /* BADGE */
-      .badge { display: inline-block; padding: 0.2rem 0.55rem; border-radius: 100px; font-size: 0.74rem; font-weight: 600; }
-      .badge-info { background: rgba(92,155,224,0.15); color: var(--info); }
-      .badge-success { background: rgba(92,184,122,0.15); color: var(--success); }
-      .badge-warn { background: rgba(201,168,76,0.15); color: var(--accent); }
-      .badge-danger { background: rgba(224,92,92,0.15); color: var(--danger); }
+      .badge {
+        display: inline-block;
+        padding: 0.2rem 0.55rem;
+        border-radius: 100px;
+        font-size: 0.74rem;
+        font-weight: 600;
+      }
+      .badge-info {
+        background: rgba(92, 155, 224, 0.15);
+        color: var(--info);
+      }
+      .badge-success {
+        background: rgba(92, 184, 122, 0.15);
+        color: var(--success);
+      }
+      .badge-warn {
+        background: rgba(201, 168, 76, 0.15);
+        color: var(--accent);
+      }
+      .badge-danger {
+        background: rgba(224, 92, 92, 0.15);
+        color: var(--danger);
+      }
 
-      /* REVIEWS */
-      .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; }
-      .review-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; transition: border-color 0.2s; }
-      .review-card:hover { border-color: var(--accent); }
-      .review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
-      .review-book { font-weight: 600; font-size: 0.95rem; }
-      .review-stars { color: var(--accent); font-size: 1rem; letter-spacing: 2px; }
-      .review-text { font-size: 0.87rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.5rem; }
-      .review-member { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.75rem; border-top: 1px solid var(--border); padding-top: 0.5rem; }
+      .reviews-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+      .review-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.25rem;
+        transition: border-color 0.2s;
+      }
+      .review-card:hover {
+        border-color: var(--accent);
+      }
+      .review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 0.75rem;
+      }
+      .review-book {
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+      .review-stars {
+        color: var(--accent);
+        font-size: 1rem;
+        letter-spacing: 2px;
+      }
+      .review-text {
+        font-size: 0.87rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+        margin-top: 0.5rem;
+      }
+      .review-member {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-top: 0.75rem;
+        border-top: 1px solid var(--border);
+        padding-top: 0.5rem;
+      }
 
-      /* CONFIRM */
-      .confirm-icon { font-size: 3rem; text-align: center; margin-bottom: 1rem; }
-      .confirm-text { text-align: center; color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
-      .confirm-title { font-family: "Playfair Display", serif; font-size: 1.2rem; text-align: center; margin-bottom: 0.5rem; }
+      .confirm-icon {
+        font-size: 3rem;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      .confirm-text {
+        text-align: center;
+        color: var(--text-muted);
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+      }
+      .confirm-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.2rem;
+        text-align: center;
+        margin-bottom: 0.5rem;
+      }
 
       @media (max-width: 600px) {
-        nav { padding: 0 1rem; gap: 1rem; }
-        .nav-brand { font-size: 1.1rem; }
-        .nav-links a span:not(.nav-icon) { display: none; }
-        .nav-user-name { display: none; }
-        main { padding: 1rem; }
-        td, thead th { padding: 0.65rem 0.75rem; }
+        nav {
+          padding: 0 1rem;
+          gap: 1rem;
+        }
+        .nav-brand {
+          font-size: 1.1rem;
+        }
+        .nav-links a span:not(.nav-icon) {
+          display: none;
+        }
+        .nav-user-name {
+          display: none;
+        }
+        main {
+          padding: 1rem;
+        }
+        td,
+        thead th {
+          padding: 0.65rem 0.75rem;
+        }
       }
     </style>
   </head>
   <body>
-
-    <!-- ══════════════════════════════════════════════════════
-         LOGIN SCREEN
-    ══════════════════════════════════════════════════════ -->
     <div id="login-screen">
       <div class="login-card">
         <div class="login-logo">
@@ -381,11 +794,21 @@
         </div>
         <div class="form-group">
           <label>Email</label>
-          <input type="email" id="login-email" placeholder="email@example.com" onkeydown="if(event.key==='Enter')doLogin()" />
+          <input
+            type="email"
+            id="login-email"
+            placeholder="email@example.com"
+            onkeydown="if(event.key==='Enter')doLogin()"
+          />
         </div>
         <div class="form-group">
           <label>Parol (telefon nomiri)</label>
-          <input type="password" id="login-password" placeholder="Telefon nomirin kiritiń" onkeydown="if(event.key==='Enter')doLogin()" />
+          <input
+            type="password"
+            id="login-password"
+            placeholder="Telefon nomirin kiritiń"
+            onkeydown="if(event.key==='Enter')doLogin()"
+          />
         </div>
         <button class="login-btn" id="login-btn" onclick="doLogin()">
           🔓 Kirіw
@@ -394,21 +817,55 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════
-         MAIN APP
-    ══════════════════════════════════════════════════════ -->
     <div id="app">
       <nav>
-        <a class="nav-brand" href="#" onclick="showPage('home');return false">📚 LibraryMS</a>
+        <a class="nav-brand" href="#" onclick="showPage('home');return false"
+          >📚 LibraryMS</a
+        >
         <ul class="nav-links">
-          <li><a href="#" onclick="showPage('home');return false" id="nav-home" class="active"><span class="nav-icon">🏠</span><span>Bas bet</span></a></li>
-          <li><a href="#" onclick="showPage('books');return false" id="nav-books"><span class="nav-icon">📖</span><span>Kitaplar</span></a></li>
-          <li><a href="#" onclick="showPage('members');return false" id="nav-members"><span class="nav-icon">👥</span><span>Aǵzalar</span></a></li>
-          <li><a href="#" onclick="showPage('borrowings');return false" id="nav-borrowings"><span class="nav-icon">🔄</span><span>Alınǵan kitaplar</span></a></li>
-          <li><a href="#" onclick="showPage('reviews');return false" id="nav-reviews"><span class="nav-icon">⭐</span><span>Pikirler</span></a></li>
+          <li>
+            <a
+              href="#"
+              onclick="showPage('home');return false"
+              id="nav-home"
+              class="active"
+              ><span class="nav-icon">🏠</span><span>Bas bet</span></a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="showPage('books');return false" id="nav-books"
+              ><span class="nav-icon">📖</span><span>Kitaplar</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              onclick="showPage('members');return false"
+              id="nav-members"
+              ><span class="nav-icon">👥</span><span>Aǵzalar</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              onclick="showPage('borrowings');return false"
+              id="nav-borrowings"
+              ><span class="nav-icon">🔄</span><span>Alınǵan kitaplar</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              onclick="showPage('reviews');return false"
+              id="nav-reviews"
+              ><span class="nav-icon">⭐</span><span>Pikirler</span></a
+            >
+          </li>
         </ul>
         <div class="nav-user">
-          <span class="nav-user-name">👤 <strong id="nav-username">—</strong></span>
+          <span class="nav-user-name"
+            >👤 <strong id="nav-username">—</strong></span
+          >
           <button class="btn-logout" onclick="doLogout()">🚪 Shıǵıw</button>
         </div>
       </nav>
@@ -419,7 +876,10 @@
           <div class="hero">
             <div class="hero-badge">Kitapxana Basqarıw Sisteması</div>
             <h1>Bilim orayı,<br />Tártipli hám qolaylı</h1>
-            <p>Kitaplar, aǵzalar, alınıp-beriliwler hám pikirlerdi bir jerden basqarıń.</p>
+            <p>
+              Kitaplar, aǵzalar, alınıp-beriliwler hám pikirlerdi bir jerden
+              basqarıń.
+            </p>
             <div class="stats-grid">
               <div class="stat-card">
                 <div class="stat-number" id="stat-books">—</div>
@@ -464,40 +924,77 @@
           <div class="section-header">
             <h2>Kitaplar</h2>
             <div class="section-actions">
-              <input type="text" class="search-input" placeholder="🔍 Kitap izlew…" oninput="filterTable('books-tbody', this.value)" />
-              <button class="btn btn-primary" onclick="openBookModal()">＋ Kitap qosıw</button>
+              <input
+                type="text"
+                class="search-input"
+                placeholder="🔍 Kitap izlew…"
+                oninput="filterTable('books-tbody', this.value)"
+              />
+              <button class="btn btn-primary" onclick="openBookModal()">
+                ＋ Kitap qosıw
+              </button>
             </div>
           </div>
           <div class="table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>ID</th><th>Ataması</th><th>Avtorı</th><th>Baspa xanası</th><th>Sánesi</th><th>Sanı</th><th>Ameller</th>
+                  <th>ID</th>
+                  <th>Ataması</th>
+                  <th>Avtorı</th>
+                  <th>Baspa xanası</th>
+                  <th>Sánesi</th>
+                  <th>Sanı</th>
+                  <th>Ameller</th>
                 </tr>
               </thead>
               <tbody id="books-tbody">
-                <tr><td colspan="7"><div class="loading"><div class="spinner"></div>Kitaplar júklenbekte…</div></td></tr>
+                <tr>
+                  <td colspan="7">
+                    <div class="loading">
+                      <div class="spinner"></div>
+                      Kitaplar júklenbekte…
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
 
-        <!-- MEMBERS -->
+        <!-- MEMBERS — no Add/Edit/Delete buttons -->
         <div id="page-members" class="page">
           <div class="section-header">
             <h2>Aǵzalar</h2>
             <div class="section-actions">
-              <input type="text" class="search-input" placeholder="🔍 Aǵzalardı izlew…" oninput="filterTable('members-tbody', this.value)" />
-              <button class="btn btn-primary" onclick="openMemberModal()">＋ Aǵza qosıw</button>
+              <input
+                type="text"
+                class="search-input"
+                placeholder="🔍 Aǵzalardı izlew…"
+                oninput="filterTable('members-tbody', this.value)"
+              />
             </div>
           </div>
           <div class="table-wrap">
             <table>
               <thead>
-                <tr><th>ID</th><th>Atı-jóni</th><th>Email</th><th>Telefon</th><th>Rol</th><th>Ameller</th></tr>
+                <tr>
+                  <th>ID</th>
+                  <th>Atı-jóni</th>
+                  <th>Email</th>
+                  <th>Telefon</th>
+                  <th>Rol</th>
+                </tr>
               </thead>
               <tbody id="members-tbody">
-                <tr><td colspan="6"><div class="loading"><div class="spinner"></div>Aǵzalar júklenbekte…</div></td></tr>
+                <tr>
+                  <td colspan="5">
+                    <div class="loading">
+                      <div class="spinner"></div>
+                      Aǵzalar júklenbekte…
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -508,17 +1005,39 @@
           <div class="section-header">
             <h2>Kitap alıw jazbaları</h2>
             <div class="section-actions">
-              <input type="text" class="search-input" placeholder="🔍 Izlew…" oninput="filterTable('borrowings-tbody', this.value)" />
-              <button class="btn btn-primary" onclick="openBorrowingModal()">＋ Jańa jazba</button>
+              <input
+                type="text"
+                class="search-input"
+                placeholder="🔍 Izlew…"
+                oninput="filterTable('borrowings-tbody', this.value)"
+              />
+              <button class="btn btn-primary" onclick="openBorrowingModal()">
+                ＋ Jańa jazba
+              </button>
             </div>
           </div>
           <div class="table-wrap">
             <table>
               <thead>
-                <tr><th>ID</th><th>Kitap</th><th>Aǵza</th><th>Alınǵan kúni</th><th>Tapsırıw kúni</th><th>Status</th><th>Ameller</th></tr>
+                <tr>
+                  <th>ID</th>
+                  <th>Kitap</th>
+                  <th>Aǵza</th>
+                  <th>Alınǵan kúni</th>
+                  <th>Tapsırıw kúni</th>
+                  <th>Status</th>
+                  <th>Ameller</th>
+                </tr>
               </thead>
               <tbody id="borrowings-tbody">
-                <tr><td colspan="7"><div class="loading"><div class="spinner"></div>Maǵlıwmatlar júklenbekte…</div></td></tr>
+                <tr>
+                  <td colspan="7">
+                    <div class="loading">
+                      <div class="spinner"></div>
+                      Maǵlıwmatlar júklenbekte…
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -529,11 +1048,16 @@
           <div class="section-header">
             <h2>Kitaplar haqqında pikirler</h2>
             <div class="section-actions">
-              <button class="btn btn-primary" onclick="openReviewModal()">＋ Pikir qosıw</button>
+              <button class="btn btn-primary" onclick="openReviewModal()">
+                ＋ Pikir qosıw
+              </button>
             </div>
           </div>
           <div id="reviews-container">
-            <div class="loading"><div class="spinner"></div>Pikirler júklenbekte…</div>
+            <div class="loading">
+              <div class="spinner"></div>
+              Pikirler júklenbekte…
+            </div>
           </div>
         </div>
       </main>
@@ -546,56 +1070,84 @@
       <div class="modal">
         <div class="modal-header">
           <div class="modal-title" id="book-modal-title">Kitap qosıw</div>
-          <button class="modal-close" onclick="closeModal('book-modal')">✕</button>
+          <button class="modal-close" onclick="closeModal('book-modal')">
+            ✕
+          </button>
         </div>
         <input type="hidden" id="book-id" />
-        <div class="form-group"><label>Ataması *</label><input type="text" id="book-title" placeholder="Kitap atamasın kiritiń" /></div>
+        <div class="form-group">
+          <label>Ataması *</label
+          ><input
+            type="text"
+            id="book-title"
+            placeholder="Kitap atamasın kiritiń"
+          />
+        </div>
         <div class="form-group">
           <label>Avtorı *</label>
-          <select id="book-author-select" style="display:none"></select>
-          <input type="text" id="book-author-text" placeholder="Avtor atı (mıs. J.K. Rowling)" />
-          <small style="color:var(--text-muted);font-size:0.75rem" id="book-author-hint"></small>
+          <select id="book-author-select" style="display: none"></select>
+          <input
+            type="text"
+            id="book-author-text"
+            placeholder="Avtor atı (mıs. J.K. Rowling)"
+          />
+          <small
+            style="color: var(--text-muted); font-size: 0.75rem"
+            id="book-author-hint"
+          ></small>
         </div>
         <div class="form-group">
           <label>Janrı</label>
-          <select id="book-genre-select" style="display:none"></select>
+          <select id="book-genre-select" style="display: none"></select>
           <input type="text" id="book-genre-text" placeholder="Janr atı" />
-          <small style="color:var(--text-muted);font-size:0.75rem" id="book-genre-hint"></small>
+          <small
+            style="color: var(--text-muted); font-size: 0.75rem"
+            id="book-genre-hint"
+          ></small>
         </div>
         <div class="form-group">
           <label>Baspa xanası</label>
-          <select id="book-publisher-select" style="display:none"></select>
-          <input type="text" id="book-publisher-text" placeholder="Baspa xana atı" />
-          <small style="color:var(--text-muted);font-size:0.75rem" id="book-publisher-hint"></small>
+          <select id="book-publisher-select" style="display: none"></select>
+          <input
+            type="text"
+            id="book-publisher-text"
+            placeholder="Baspa xana atı"
+          />
+          <small
+            style="color: var(--text-muted); font-size: 0.75rem"
+            id="book-publisher-hint"
+          ></small>
         </div>
-        <div class="form-group"><label>ISBN *</label><input type="text" id="book-isbn" placeholder="9781234567890" maxlength="13" /></div>
-        <div class="form-group"><label>Basılǵan sánesi *</label><input type="date" id="book-published-date" /></div>
-        <div class="form-group"><label>Mavjud nusqalar sanı</label><input type="number" id="book-copies" placeholder="1" min="0" value="1" /></div>
-        <div class="form-footer">
-          <button class="btn btn-ghost" onclick="closeModal('book-modal')">Biykar etiw</button>
-          <button class="btn btn-primary" onclick="saveBook()">💾 Saqlaw</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- MEMBER MODAL -->
-    <div class="modal-overlay" id="member-modal">
-      <div class="modal">
-        <div class="modal-header">
-          <div class="modal-title" id="member-modal-title">Aǵza qosıw</div>
-          <button class="modal-close" onclick="closeModal('member-modal')">✕</button>
-        </div>
-        <input type="hidden" id="member-id" />
-        <div class="form-group"><label>Atı-jóni *</label><input type="text" id="member-name" placeholder="Atı-jónin kiritin'" /></div>
-        <div class="form-group"><label>Email *</label><input type="email" id="member-email" placeholder="email@example.com" /></div>
-        <div class="form-group"><label>Telefon</label><input type="text" id="member-phone" placeholder="+998 XX XXX XX XX" /></div>
         <div class="form-group">
-          <label>Rol</label>
-          <select id="member-role-select"><option value="">Rol joq</option></select>
+          <label>ISBN *</label
+          ><input
+            type="text"
+            id="book-isbn"
+            placeholder="9781234567890"
+            maxlength="13"
+          />
+        </div>
+        <div class="form-group">
+          <label>Basılǵan sánesi *</label
+          ><input type="date" id="book-published-date" />
+        </div>
+        <div class="form-group">
+          <label>Mavjud nusqalar sanı</label
+          ><input
+            type="number"
+            id="book-copies"
+            placeholder="1"
+            min="0"
+            value="1"
+          />
         </div>
         <div class="form-footer">
-          <button class="btn btn-ghost" onclick="closeModal('member-modal')">Biykar etiw</button>
-          <button class="btn btn-primary" onclick="saveMember()">💾 Saqlaw</button>
+          <button class="btn btn-ghost" onclick="closeModal('book-modal')">
+            Biykar etiw
+          </button>
+          <button class="btn btn-primary" onclick="saveBook()">
+            💾 Saqlaw
+          </button>
         </div>
       </div>
     </div>
@@ -605,16 +1157,37 @@
       <div class="modal">
         <div class="modal-header">
           <div class="modal-title" id="borrowing-modal-title">Jańa jazba</div>
-          <button class="modal-close" onclick="closeModal('borrowing-modal')">✕</button>
+          <button class="modal-close" onclick="closeModal('borrowing-modal')">
+            ✕
+          </button>
         </div>
         <input type="hidden" id="borrowing-id" />
-        <div class="form-group"><label>Kitap *</label><select id="borrowing-book"><option value="">Kitaptı tańlań…</option></select></div>
-        <div class="form-group"><label>Aǵza *</label><select id="borrowing-member"><option value="">Aǵzanı tańlań…</option></select></div>
-        <div class="form-group"><label>Alınǵan kúni *</label><input type="date" id="borrowing-date" /></div>
-        <div class="form-group"><label>Tapsırıw kúni</label><input type="date" id="borrowing-return" /></div>
+        <div class="form-group">
+          <label>Kitap *</label
+          ><select id="borrowing-book">
+            <option value="">Kitaptı tańlań…</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Aǵza *</label
+          ><select id="borrowing-member">
+            <option value="">Aǵzanı tańlań…</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Alınǵan kúni *</label><input type="date" id="borrowing-date" />
+        </div>
+        <div class="form-group">
+          <label>Tapsırıw kúni</label
+          ><input type="date" id="borrowing-return" />
+        </div>
         <div class="form-footer">
-          <button class="btn btn-ghost" onclick="closeModal('borrowing-modal')">Biykar etiw</button>
-          <button class="btn btn-primary" onclick="saveBorrowing()">💾 Saqlaw</button>
+          <button class="btn btn-ghost" onclick="closeModal('borrowing-modal')">
+            Biykar etiw
+          </button>
+          <button class="btn btn-primary" onclick="saveBorrowing()">
+            💾 Saqlaw
+          </button>
         </div>
       </div>
     </div>
@@ -624,11 +1197,23 @@
       <div class="modal">
         <div class="modal-header">
           <div class="modal-title" id="review-modal-title">Pikir qosıw</div>
-          <button class="modal-close" onclick="closeModal('review-modal')">✕</button>
+          <button class="modal-close" onclick="closeModal('review-modal')">
+            ✕
+          </button>
         </div>
         <input type="hidden" id="review-id" />
-        <div class="form-group"><label>Kitap *</label><select id="review-book"><option value="">Kitaptı tańlań…</option></select></div>
-        <div class="form-group"><label>Aǵza *</label><select id="review-member"><option value="">Aǵzanı tańlań…</option></select></div>
+        <div class="form-group">
+          <label>Kitap *</label
+          ><select id="review-book">
+            <option value="">Kitaptı tańlań…</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Aǵza *</label
+          ><select id="review-member">
+            <option value="">Aǵzanı tańlań…</option>
+          </select>
+        </div>
         <div class="form-group">
           <label>Reyting (1–5) *</label>
           <select id="review-rating">
@@ -639,161 +1224,192 @@
             <option value="1">⭐ — Júda jaman</option>
           </select>
         </div>
-        <div class="form-group"><label>Pikir teksti</label><textarea id="review-text" rows="3" placeholder="Pikirlerin'izdi jazin'…"></textarea></div>
+        <div class="form-group">
+          <label>Pikir teksti</label
+          ><textarea
+            id="review-text"
+            rows="3"
+            placeholder="Pikirlerin'izdi jazin'…"
+          ></textarea>
+        </div>
         <div class="form-footer">
-          <button class="btn btn-ghost" onclick="closeModal('review-modal')">Biykar etiw</button>
-          <button class="btn btn-primary" onclick="saveReview()">💾 Saqlaw</button>
+          <button class="btn btn-ghost" onclick="closeModal('review-modal')">
+            Biykar etiw
+          </button>
+          <button class="btn btn-primary" onclick="saveReview()">
+            💾 Saqlaw
+          </button>
         </div>
       </div>
     </div>
 
     <!-- CONFIRM DELETE MODAL -->
     <div class="modal-overlay" id="confirm-modal">
-      <div class="modal" style="max-width:360px">
+      <div class="modal" style="max-width: 360px">
         <div class="confirm-icon">🗑️</div>
         <div class="confirm-title">Óshiriw</div>
-        <div class="confirm-text">Bul jazbanı óshiriwdi qáleysiz be? Bul ámeldi qaytarıp bolmaydı.</div>
-        <div class="form-footer" style="justify-content:center">
-          <button class="btn btn-ghost" onclick="closeModal('confirm-modal')">Biykar etiw</button>
-          <button class="btn btn-danger" id="confirm-delete-btn">Óshiriw</button>
+        <div class="confirm-text">
+          Bul jazbanı óshiriwdi qáleysiz be? Bul ámeldi qaytarıp bolmaydı.
+        </div>
+        <div class="form-footer" style="justify-content: center">
+          <button class="btn btn-ghost" onclick="closeModal('confirm-modal')">
+            Biykar etiw
+          </button>
+          <button class="btn btn-danger" id="confirm-delete-btn">
+            Óshiriw
+          </button>
         </div>
       </div>
     </div>
 
     <script>
-      /* =============================================================
-       CONFIG
-      ============================================================= */
       const BASE = "https://librarymanagementsystem-ev7o.onrender.com";
       const API = {
-        books:      `${BASE}/api/books/`,
-        members:    `${BASE}/api/members/`,
-        borrowing:  `${BASE}/api/borrowing/`,
-        reviews:    `${BASE}/api/reviews/`,
-        authors:    `${BASE}/api/books/authors/`,
+        books: `${BASE}/api/books/`,
+        members: `${BASE}/api/members/`,
+        borrowing: `${BASE}/api/borrowing/`,
+        reviews: `${BASE}/api/reviews/`,
+        authors: `${BASE}/api/books/authors/`,
         publishers: `${BASE}/api/books/publishers/`,
-        genres:     `${BASE}/api/books/genres/`,
-        roles:      `${BASE}/api/members/roles/`,
+        genres: `${BASE}/api/books/genres/`,
+        roles: `${BASE}/api/members/roles/`,
       };
 
       let store = {
-        books: [], members: [], borrowings: [], reviews: [],
-        authors: [], publishers: [], genres: [], roles: [],
+        books: [],
+        members: [],
+        borrowings: [],
+        reviews: [],
+        authors: [],
+        publishers: [],
+        genres: [],
+        roles: [],
       };
 
-      // Currently logged-in member object
       let currentUser = null;
 
-      /* =============================================================
-       LOGIN
-      ============================================================= */
+      /* LOGIN */
       async function doLogin() {
-        const email    = document.getElementById('login-email').value.trim();
-        const password = document.getElementById('login-password').value.trim();
-        const errEl    = document.getElementById('login-error');
-        const btn      = document.getElementById('login-btn');
+        const email = document.getElementById("login-email").value.trim();
+        const password = document.getElementById("login-password").value.trim();
+        const errEl = document.getElementById("login-error");
+        const btn = document.getElementById("login-btn");
 
-        errEl.classList.remove('show');
+        errEl.classList.remove("show");
 
         if (!email || !password) {
-          errEl.textContent = 'Email hám parol kiritiń.';
-          errEl.classList.add('show');
+          errEl.textContent = "Email hám parol kiritiń.";
+          errEl.classList.add("show");
           return;
         }
 
         btn.disabled = true;
-        btn.textContent = '⏳ Tekserіліp atır…';
+        btn.textContent = "⏳ Tekserіліp atır…";
 
         try {
           const data = await apiFetch(API.members);
           const members = normalize(data);
 
-          // Match by email; use phone_number as password
           const match = members.find(
-            (m) => m.email?.toLowerCase() === email.toLowerCase() &&
-                   (m.phone || m.phone_number || '') === password
+            (m) =>
+              m.email?.toLowerCase() === email.toLowerCase() &&
+              (m.phone || m.phone_number || "") === password
           );
 
           if (!match) {
-            errEl.textContent = 'Email yamasa parol nátuwrı. Aǵza tabılmadı.';
-            errEl.classList.add('show');
+            errEl.textContent = "Email yamasa parol nátuwrı. Aǵza tabılmadı.";
+            errEl.classList.add("show");
             return;
           }
 
           currentUser = match;
           store.members = members;
 
-          // Show app
-          document.getElementById('login-screen').style.display = 'none';
-          const app = document.getElementById('app');
-          app.classList.add('visible');
+          document.getElementById("login-screen").style.display = "none";
+          const app = document.getElementById("app");
+          app.classList.add("visible");
 
           const name = match.name || match.full_name || match.email;
-          document.getElementById('nav-username').textContent = name;
+          document.getElementById("nav-username").textContent = name;
 
           loadStats();
           toast(`Xош келдіńіз, ${name}! 🎉`);
-
         } catch (e) {
-          errEl.textContent = 'Server menen baylanıs joq: ' + e.message;
-          errEl.classList.add('show');
+          errEl.textContent = "Server menen baylanıs joq: " + e.message;
+          errEl.classList.add("show");
         } finally {
           btn.disabled = false;
-          btn.innerHTML = '🔓 Kirіw';
+          btn.innerHTML = "🔓 Kirіw";
         }
       }
 
       function doLogout() {
         currentUser = null;
-        store = { books: [], members: [], borrowings: [], reviews: [], authors: [], publishers: [], genres: [], roles: [] };
-        document.getElementById('app').classList.remove('visible');
-        document.getElementById('login-screen').style.display = 'flex';
-        document.getElementById('login-email').value = '';
-        document.getElementById('login-password').value = '';
-        document.getElementById('login-error').classList.remove('show');
-        document.getElementById('nav-username').textContent = '—';
-        toast('Shıǵıp kettińiz.');
+        store = {
+          books: [],
+          members: [],
+          borrowings: [],
+          reviews: [],
+          authors: [],
+          publishers: [],
+          genres: [],
+          roles: [],
+        };
+        document.getElementById("app").classList.remove("visible");
+        document.getElementById("login-screen").style.display = "flex";
+        document.getElementById("login-email").value = "";
+        document.getElementById("login-password").value = "";
+        document.getElementById("login-error").classList.remove("show");
+        document.getElementById("nav-username").textContent = "—";
+        toast("Shıǵıp kettińiz.");
       }
 
-      /* =============================================================
-       NAVIGATION
-      ============================================================= */
+      /* NAVIGATION */
       function showPage(id) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-        document.getElementById('page-' + id).classList.add('active');
-        const navEl = document.getElementById('nav-' + id);
-        if (navEl) navEl.classList.add('active');
-        if (id === 'books')     loadBooks();
-        if (id === 'members')   loadMembers();
-        if (id === 'borrowings') loadBorrowings();
-        if (id === 'reviews')   loadReviews();
+        document
+          .querySelectorAll(".page")
+          .forEach((p) => p.classList.remove("active"));
+        document
+          .querySelectorAll(".nav-links a")
+          .forEach((a) => a.classList.remove("active"));
+        document.getElementById("page-" + id).classList.add("active");
+        const navEl = document.getElementById("nav-" + id);
+        if (navEl) navEl.classList.add("active");
+        if (id === "books") loadBooks();
+        if (id === "members") loadMembers();
+        if (id === "borrowings") loadBorrowings();
+        if (id === "reviews") loadReviews();
       }
 
-      /* =============================================================
-       API HELPER
-      ============================================================= */
+      /* API HELPERS */
       async function apiFetch(url, opts = {}) {
         const res = await fetch(url, {
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
           ...opts,
         });
-        if (res.status === 403) throw new Error('403 Forbidden');
+        if (res.status === 403) throw new Error("403 Forbidden");
         if (res.status === 404) throw new Error(`404 — Not found: ${url}`);
         if (res.status === 400) {
           const body = await res.json().catch(() => ({}));
-          throw new Error('400 Bad Request: ' + JSON.stringify(body));
+          throw new Error("400 Bad Request: " + JSON.stringify(body));
         }
         if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
         if (res.status === 204) return null;
-        const ct = res.headers.get('content-type') || '';
-        if (ct.includes('json')) return res.json();
+        const ct = res.headers.get("content-type") || "";
+        if (ct.includes("json")) return res.json();
         return null;
       }
 
       async function safeFetch(url, opts) {
-        try { return await apiFetch(url, opts); }
-        catch (e) { console.warn('[API]', e.message); return null; }
+        try {
+          return await apiFetch(url, opts);
+        } catch (e) {
+          console.warn("[API]", e.message);
+          return null;
+        }
       }
 
       function normalize(data) {
@@ -803,532 +1419,691 @@
         return [];
       }
 
-      /* =============================================================
-       TOAST
-      ============================================================= */
-      function toast(msg, type = 'success') {
-        const el = document.createElement('div');
+      /* TOAST */
+      function toast(msg, type = "success") {
+        const el = document.createElement("div");
         el.className = `toast ${type}`;
-        el.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span> ${esc(msg)}`;
-        document.getElementById('toast-container').appendChild(el);
+        el.innerHTML = `<span>${type === "success" ? "✅" : "❌"}</span> ${esc(
+          msg
+        )}`;
+        document.getElementById("toast-container").appendChild(el);
         setTimeout(() => el.remove(), 4000);
       }
 
-      /* =============================================================
-       MODAL
-      ============================================================= */
-      function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-      function _openModal(id) { document.getElementById(id).classList.add('open'); }
+      /* MODAL */
+      function closeModal(id) {
+        document.getElementById(id).classList.remove("open");
+      }
+      function _openModal(id) {
+        document.getElementById(id).classList.add("open");
+      }
 
-      document.querySelectorAll('.modal-overlay').forEach(el => {
-        el.addEventListener('click', e => { if (e.target === el) closeModal(el.id); });
+      document.querySelectorAll(".modal-overlay").forEach((el) => {
+        el.addEventListener("click", (e) => {
+          if (e.target === el) closeModal(el.id);
+        });
       });
 
-      /* =============================================================
-       TABLE FILTER
-      ============================================================= */
+      /* TABLE FILTER */
       function filterTable(tbodyId, query) {
         const q = query.toLowerCase();
-        document.querySelectorAll(`#${tbodyId} tr`).forEach(row => {
-          row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+        document.querySelectorAll(`#${tbodyId} tr`).forEach((row) => {
+          row.style.display = row.textContent.toLowerCase().includes(q)
+            ? ""
+            : "none";
         });
       }
 
       function setLoading(id, cols) {
-        document.getElementById(id).innerHTML = `<tr><td colspan="${cols}"><div class="loading"><div class="spinner"></div>Loading…</div></td></tr>`;
+        document.getElementById(
+          id
+        ).innerHTML = `<tr><td colspan="${cols}"><div class="loading"><div class="spinner"></div>Loading…</div></td></tr>`;
       }
       function setEmpty(id, cols, msg) {
-        document.getElementById(id).innerHTML = `<tr><td colspan="${cols}"><div class="empty-state"><div class="empty-icon">📭</div><p>${msg}</p></div></td></tr>`;
+        document.getElementById(
+          id
+        ).innerHTML = `<tr><td colspan="${cols}"><div class="empty-state"><div class="empty-icon">📭</div><p>${msg}</p></div></td></tr>`;
       }
 
-      /* =============================================================
-       HOME STATS
-      ============================================================= */
+      /* HOME STATS */
       async function loadStats() {
         const [b, m, br] = await Promise.all([
-          safeFetch(API.books), safeFetch(API.members), safeFetch(API.borrowing),
+          safeFetch(API.books),
+          safeFetch(API.members),
+          safeFetch(API.borrowing),
         ]);
         const setN = (id, data) => {
           if (!data) return;
-          const n = Array.isArray(data) ? data.length : data.count ?? data.results?.length ?? '—';
+          const n = Array.isArray(data)
+            ? data.length
+            : data.count ?? data.results?.length ?? "—";
           document.getElementById(id).textContent = n;
         };
-        setN('stat-books', b);
-        setN('stat-members', m);
-        setN('stat-borrowings', br);
+        setN("stat-books", b);
+        setN("stat-members", m);
+        setN("stat-borrowings", br);
       }
 
-      /* =============================================================
-       BOOKS
-      ============================================================= */
+      /* BOOKS */
       async function loadBooks() {
-        setLoading('books-tbody', 7);
-        const [booksData, authorsData, publishersData, genresData] = await Promise.all([
-          safeFetch(API.books), safeFetch(API.authors), safeFetch(API.publishers), safeFetch(API.genres),
-        ]);
-        store.books      = normalize(booksData);
-        store.authors    = normalize(authorsData);
+        setLoading("books-tbody", 7);
+        const [booksData, authorsData, publishersData, genresData] =
+          await Promise.all([
+            safeFetch(API.books),
+            safeFetch(API.authors),
+            safeFetch(API.publishers),
+            safeFetch(API.genres),
+          ]);
+        store.books = normalize(booksData);
+        store.authors = normalize(authorsData);
         store.publishers = normalize(publishersData);
-        store.genres     = normalize(genresData);
+        store.genres = normalize(genresData);
         renderBooks();
       }
 
       function getAuthorName(val) {
-        if (!val) return '—';
-        if (typeof val === 'object') return val.name || String(val.id);
-        const found = store.authors.find(a => a.id == val);
+        if (!val) return "—";
+        if (typeof val === "object") return val.name || String(val.id);
+        const found = store.authors.find((a) => a.id == val);
         return found ? found.name : String(val);
       }
       function getPublisherName(val) {
-        if (!val) return '—';
-        if (typeof val === 'object') return val.name || String(val.id);
-        const found = store.publishers.find(p => p.id == val);
+        if (!val) return "—";
+        if (typeof val === "object") return val.name || String(val.id);
+        const found = store.publishers.find((p) => p.id == val);
         return found ? found.name : String(val);
       }
 
       function renderBooks() {
-        const tbody = document.getElementById('books-tbody');
-        if (!store.books.length) { setEmpty('books-tbody', 7, 'No books found. Add your first book!'); return; }
-        tbody.innerHTML = store.books.map(b => `
+        const tbody = document.getElementById("books-tbody");
+        if (!store.books.length) {
+          setEmpty("books-tbody", 7, "No books found. Add your first book!");
+          return;
+        }
+        tbody.innerHTML = store.books
+          .map(
+            (b) => `
           <tr>
-            <td>${b.id ?? '—'}</td>
+            <td>${b.id ?? "—"}</td>
             <td><strong>${esc(b.title)}</strong></td>
             <td>${esc(getAuthorName(b.author))}</td>
             <td>${esc(getPublisherName(b.publisher))}</td>
-            <td>${b.published_date ? fmt(b.published_date) : '—'}</td>
-            <td>${b.copies_available ?? '—'}</td>
+            <td>${b.published_date ? fmt(b.published_date) : "—"}</td>
+            <td>${b.copies_available ?? "—"}</td>
             <td><div class="td-actions">
-              <button class="btn btn-ghost btn-sm" onclick="editBook(${b.id})">✏️ Edit</button>
-              <button class="btn btn-danger btn-sm" onclick="confirmDelete('books',${b.id})">🗑️</button>
+              <button class="btn btn-ghost btn-sm" onclick="editBook(${
+                b.id
+              })">✏️ Ózgertiw</button>
+              <button class="btn btn-danger btn-sm" onclick="confirmDelete('books',${
+                b.id
+              })">🗑️</button>
             </div></td>
-          </tr>`).join('');
+          </tr>`
+          )
+          .join("");
         populateBookSelects();
       }
 
       function populateAuthorSelect(selectedId = null) {
-        const sel = document.getElementById('book-author-select');
-        const txt = document.getElementById('book-author-text');
-        const hint = document.getElementById('book-author-hint');
+        const sel = document.getElementById("book-author-select");
+        const txt = document.getElementById("book-author-text");
+        const hint = document.getElementById("book-author-hint");
         if (store.authors.length) {
-          sel.innerHTML = '<option value="">Avtor tańlań…</option>' +
-            store.authors.map(a => `<option value="${a.id}" ${a.id == selectedId ? 'selected' : ''}>${esc(a.name)}</option>`).join('');
-          sel.style.display = ''; txt.style.display = 'none'; hint.textContent = '';
+          sel.innerHTML =
+            '<option value="">Avtor tańlań…</option>' +
+            store.authors
+              .map(
+                (a) =>
+                  `<option value="${a.id}" ${
+                    a.id == selectedId ? "selected" : ""
+                  }>${esc(a.name)}</option>`
+              )
+              .join("");
+          sel.style.display = "";
+          txt.style.display = "none";
+          hint.textContent = "";
         } else {
-          sel.style.display = 'none'; txt.style.display = ''; hint.textContent = 'Avtor atın jazıń';
+          sel.style.display = "none";
+          txt.style.display = "";
+          hint.textContent = "Avtor atın jazıń";
         }
       }
       function populateGenreSelect(selectedId = null) {
-        const sel = document.getElementById('book-genre-select');
-        const txt = document.getElementById('book-genre-text');
-        const hint = document.getElementById('book-genre-hint');
+        const sel = document.getElementById("book-genre-select");
+        const txt = document.getElementById("book-genre-text");
+        const hint = document.getElementById("book-genre-hint");
         if (store.genres.length) {
-          sel.innerHTML = '<option value="">Janr tańlań…</option>' +
-            store.genres.map(g => `<option value="${g.id}" ${g.id == selectedId ? 'selected' : ''}>${esc(g.name)}</option>`).join('');
-          sel.style.display = ''; txt.style.display = 'none'; hint.textContent = '';
+          sel.innerHTML =
+            '<option value="">Janr tańlań…</option>' +
+            store.genres
+              .map(
+                (g) =>
+                  `<option value="${g.id}" ${
+                    g.id == selectedId ? "selected" : ""
+                  }>${esc(g.name)}</option>`
+              )
+              .join("");
+          sel.style.display = "";
+          txt.style.display = "none";
+          hint.textContent = "";
         } else {
-          sel.style.display = 'none'; txt.style.display = ''; hint.textContent = 'Janr atın jazıń';
+          sel.style.display = "none";
+          txt.style.display = "";
+          hint.textContent = "Janr atın jazıń";
         }
       }
       function populatePublisherSelect(selectedId = null) {
-        const sel = document.getElementById('book-publisher-select');
-        const txt = document.getElementById('book-publisher-text');
-        const hint = document.getElementById('book-publisher-hint');
+        const sel = document.getElementById("book-publisher-select");
+        const txt = document.getElementById("book-publisher-text");
+        const hint = document.getElementById("book-publisher-hint");
         if (store.publishers.length) {
-          sel.innerHTML = '<option value="">Baspa xana tańlań…</option>' +
-            store.publishers.map(p => `<option value="${p.id}" ${p.id == selectedId ? 'selected' : ''}>${esc(p.name)}</option>`).join('');
-          sel.style.display = ''; txt.style.display = 'none'; hint.textContent = '';
+          sel.innerHTML =
+            '<option value="">Baspa xana tańlań…</option>' +
+            store.publishers
+              .map(
+                (p) =>
+                  `<option value="${p.id}" ${
+                    p.id == selectedId ? "selected" : ""
+                  }>${esc(p.name)}</option>`
+              )
+              .join("");
+          sel.style.display = "";
+          txt.style.display = "none";
+          hint.textContent = "";
         } else {
-          sel.style.display = 'none'; txt.style.display = ''; hint.textContent = 'Baspa xana atın jazıń';
+          sel.style.display = "none";
+          txt.style.display = "";
+          hint.textContent = "Baspa xana atın jazıń";
         }
       }
 
       function openBookModal() {
-        document.getElementById('book-modal-title').textContent = 'Kitap qosıw';
-        document.getElementById('book-id').value = '';
-        document.getElementById('book-title').value = '';
-        document.getElementById('book-isbn').value = '';
-        document.getElementById('book-published-date').value = '';
-        document.getElementById('book-copies').value = '1';
-        populateAuthorSelect(); populateGenreSelect(); populatePublisherSelect();
-        _openModal('book-modal');
+        document.getElementById("book-modal-title").textContent = "Kitap qosıw";
+        document.getElementById("book-id").value = "";
+        document.getElementById("book-title").value = "";
+        document.getElementById("book-isbn").value = "";
+        document.getElementById("book-published-date").value = "";
+        document.getElementById("book-copies").value = "1";
+        populateAuthorSelect();
+        populateGenreSelect();
+        populatePublisherSelect();
+        _openModal("book-modal");
       }
 
       function editBook(id) {
-        const b = store.books.find(x => x.id == id);
+        const b = store.books.find((x) => x.id == id);
         if (!b) return;
-        document.getElementById('book-modal-title').textContent = 'Kitaptı ózgertiw';
-        document.getElementById('book-id').value = b.id;
-        document.getElementById('book-title').value = b.title || '';
-        document.getElementById('book-isbn').value = b.isbn || '';
-        document.getElementById('book-published-date').value = b.published_date || '';
-        document.getElementById('book-copies').value = b.copies_available ?? 1;
-        const authorId    = typeof b.author    === 'object' ? b.author?.id    : b.author;
-        const genreId     = typeof b.genre     === 'object' ? b.genre?.id     : b.genre;
-        const publisherId = typeof b.publisher === 'object' ? b.publisher?.id : b.publisher;
-        populateAuthorSelect(authorId); populateGenreSelect(genreId); populatePublisherSelect(publisherId);
-        _openModal('book-modal');
+        document.getElementById("book-modal-title").textContent =
+          "Kitaptı ózgertiw";
+        document.getElementById("book-id").value = b.id;
+        document.getElementById("book-title").value = b.title || "";
+        document.getElementById("book-isbn").value = b.isbn || "";
+        document.getElementById("book-published-date").value =
+          b.published_date || "";
+        document.getElementById("book-copies").value = b.copies_available ?? 1;
+        const authorId = typeof b.author === "object" ? b.author?.id : b.author;
+        const genreId = typeof b.genre === "object" ? b.genre?.id : b.genre;
+        const publisherId =
+          typeof b.publisher === "object" ? b.publisher?.id : b.publisher;
+        populateAuthorSelect(authorId);
+        populateGenreSelect(genreId);
+        populatePublisherSelect(publisherId);
+        _openModal("book-modal");
       }
 
       async function saveBook() {
-        const id    = document.getElementById('book-id').value;
-        const title = document.getElementById('book-title').value.trim();
-        const isbn  = document.getElementById('book-isbn').value.trim();
-        const date  = document.getElementById('book-published-date').value;
-        if (!title) { toast('Kitap ataması kerek!', 'error'); return; }
-        if (!isbn)  { toast('ISBN kerek!', 'error'); return; }
-        if (!date)  { toast('Basılǵan sánesi kerek!', 'error'); return; }
+        const id = document.getElementById("book-id").value;
+        const title = document.getElementById("book-title").value.trim();
+        const isbn = document.getElementById("book-isbn").value.trim();
+        const date = document.getElementById("book-published-date").value;
+        if (!title) {
+          toast("Kitap ataması kerek!", "error");
+          return;
+        }
+        if (!isbn) {
+          toast("ISBN kerek!", "error");
+          return;
+        }
+        if (!date) {
+          toast("Basılǵan sánesi kerek!", "error");
+          return;
+        }
 
-        const authorSelVis    = document.getElementById('book-author-select').style.display    !== 'none';
-        const genreSelVis     = document.getElementById('book-genre-select').style.display     !== 'none';
-        const publisherSelVis = document.getElementById('book-publisher-select').style.display !== 'none';
+        const authorSelVis =
+          document.getElementById("book-author-select").style.display !==
+          "none";
+        const genreSelVis =
+          document.getElementById("book-genre-select").style.display !== "none";
+        const publisherSelVis =
+          document.getElementById("book-publisher-select").style.display !==
+          "none";
 
         const payload = {
-          title, isbn, published_date: date,
-          copies_available: parseInt(document.getElementById('book-copies').value) || 1,
+          title,
+          isbn,
+          published_date: date,
+          copies_available:
+            parseInt(document.getElementById("book-copies").value) || 1,
         };
-        if (authorSelVis)    { const v = document.getElementById('book-author-select').value;    if (v) payload.author    = parseInt(v); }
-        if (genreSelVis)     { const v = document.getElementById('book-genre-select').value;     if (v) payload.genre     = parseInt(v); }
-        if (publisherSelVis) { const v = document.getElementById('book-publisher-select').value; if (v) payload.publisher = parseInt(v); }
+        if (authorSelVis) {
+          const v = document.getElementById("book-author-select").value;
+          if (v) payload.author = parseInt(v);
+        }
+        if (genreSelVis) {
+          const v = document.getElementById("book-genre-select").value;
+          if (v) payload.genre = parseInt(v);
+        }
+        if (publisherSelVis) {
+          const v = document.getElementById("book-publisher-select").value;
+          if (v) payload.publisher = parseInt(v);
+        }
 
         try {
           if (id) {
-            const updated = await apiFetch(`${API.books}${id}/`, { method: 'PUT', body: JSON.stringify(payload) });
-            const idx = store.books.findIndex(x => x.id == id);
+            const updated = await apiFetch(`${API.books}${id}/`, {
+              method: "PUT",
+              body: JSON.stringify(payload),
+            });
+            const idx = store.books.findIndex((x) => x.id == id);
             store.books[idx] = updated || { ...store.books[idx], ...payload };
-            toast('Kitap jańalandı!');
+            toast("Kitap jańalandı!");
           } else {
-            const created = await apiFetch(API.books, { method: 'POST', body: JSON.stringify(payload) });
+            const created = await apiFetch(API.books, {
+              method: "POST",
+              body: JSON.stringify(payload),
+            });
             store.books.push(created || { id: Date.now(), ...payload });
-            toast('Kitap qosıldı! ✅');
+            toast("Kitap qosıldı! ✅");
           }
-          closeModal('book-modal'); renderBooks(); loadStats();
-        } catch (e) { toast(e.message, 'error'); }
+          closeModal("book-modal");
+          renderBooks();
+          loadStats();
+        } catch (e) {
+          toast(e.message, "error");
+        }
       }
 
-      /* =============================================================
-       MEMBERS
-      ============================================================= */
+      /* MEMBERS */
       async function loadMembers() {
-        setLoading('members-tbody', 6);
+        setLoading("members-tbody", 5);
         const [membersData, rolesData] = await Promise.all([
-          safeFetch(API.members), safeFetch(API.roles),
+          safeFetch(API.members),
+          safeFetch(API.roles),
         ]);
         store.members = normalize(membersData);
-        store.roles   = normalize(rolesData);
+        store.roles = normalize(rolesData);
         renderMembers();
         populateMemberSelects();
-        const roleSel = document.getElementById('member-role-select');
-        roleSel.innerHTML = '<option value="">Rol joq</option>' +
-          store.roles.map(r => `<option value="${r.id}">${esc(r.name || String(r.id))}</option>`).join('');
       }
 
       function getMemberName(val) {
-        if (!val) return '—';
-        if (typeof val === 'object') return val.name || val.full_name || val.email || String(val.id);
-        const m = store.members.find(x => x.id == val);
+        if (!val) return "—";
+        if (typeof val === "object")
+          return val.name || val.full_name || val.email || String(val.id);
+        const m = store.members.find((x) => x.id == val);
         return m ? m.name || m.full_name || m.email : String(val);
       }
 
       function renderMembers() {
-        const tbody = document.getElementById('members-tbody');
-        if (!store.members.length) { setEmpty('members-tbody', 6, 'Aǵzalar joq.'); return; }
-        tbody.innerHTML = store.members.map(m => {
-          const name = m.name || m.full_name || m.username || '—';
-          const role = m.role_name || (m.role && typeof m.role === 'object' ? m.role.name : null) ||
-                       store.roles.find(r => r.id == m.role)?.name || m.role || '—';
-          return `<tr>
+        const tbody = document.getElementById("members-tbody");
+        if (!store.members.length) {
+          setEmpty("members-tbody", 5, "Aǵzalar joq.");
+          return;
+        }
+        tbody.innerHTML = store.members
+          .map((m) => {
+            const name = m.name || m.full_name || m.username || "—";
+            const role =
+              m.role_name ||
+              (m.role && typeof m.role === "object" ? m.role.name : null) ||
+              store.roles.find((r) => r.id == m.role)?.name ||
+              m.role ||
+              "—";
+            return `<tr>
             <td>${m.id}</td>
             <td><strong>${esc(name)}</strong></td>
-            <td>${esc(m.email || '—')}</td>
-            <td>${esc(m.phone || m.phone_number || '—')}</td>
-            <td>${role !== '—' ? `<span class="badge badge-info">${esc(String(role))}</span>` : '—'}</td>
-            <td><div class="td-actions">
-              <button class="btn btn-ghost btn-sm" onclick="editMember(${m.id})">✏️ Edit</button>
-              <button class="btn btn-danger btn-sm" onclick="confirmDelete('members',${m.id})">🗑️</button>
-            </div></td>
+            <td>${esc(m.email || "—")}</td>
+            <td>${esc(m.phone || m.phone_number || "—")}</td>
+            <td>${
+              role !== "—"
+                ? `<span class="badge badge-info">${esc(String(role))}</span>`
+                : "—"
+            }</td>
           </tr>`;
-        }).join('');
-      }
-
-      function openMemberModal() {
-        document.getElementById('member-modal-title').textContent = 'Aǵza qosıw';
-        document.getElementById('member-id').value = '';
-        ['member-name','member-email','member-phone'].forEach(i => document.getElementById(i).value = '');
-        document.getElementById('member-role-select').value = '';
-        _openModal('member-modal');
-      }
-
-      function editMember(id) {
-        const m = store.members.find(x => x.id == id);
-        if (!m) return;
-        document.getElementById('member-modal-title').textContent = 'Aǵzanı ózgertiw';
-        document.getElementById('member-id').value = m.id;
-        document.getElementById('member-name').value  = m.name || m.full_name || '';
-        document.getElementById('member-email').value = m.email || '';
-        document.getElementById('member-phone').value = m.phone || m.phone_number || '';
-        const roleId = typeof m.role === 'object' ? m.role?.id : m.role;
-        document.getElementById('member-role-select').value = roleId || '';
-        _openModal('member-modal');
-      }
-
-      async function saveMember() {
-        const id    = document.getElementById('member-id').value;
-        const name  = document.getElementById('member-name').value.trim();
-        const email = document.getElementById('member-email').value.trim();
-        if (!name || !email) { toast('Atı-jóni hám email kerek.', 'error'); return; }
-        const payload = {
-          name, email,
-          phone: document.getElementById('member-phone').value.trim() || null,
-          role:  document.getElementById('member-role-select').value  || null,
-        };
-        try {
-          if (id) {
-            const updated = await apiFetch(`${API.members}${id}/`, { method: 'PUT', body: JSON.stringify(payload) });
-            const idx = store.members.findIndex(x => x.id == id);
-            store.members[idx] = updated || { ...store.members[idx], ...payload };
-            toast('Aǵza jańalandı!');
-          } else {
-            const created = await apiFetch(API.members, { method: 'POST', body: JSON.stringify(payload) });
-            store.members.push(created || { id: Date.now(), ...payload });
-            toast('Aǵza qosıldı!');
-          }
-          closeModal('member-modal'); renderMembers(); populateMemberSelects(); loadStats();
-        } catch (e) { toast(e.message, 'error'); }
+          })
+          .join("");
       }
 
       function populateMemberSelects() {
-        ['borrowing-member', 'review-member'].forEach(selId => {
+        ["borrowing-member", "review-member"].forEach((selId) => {
           const sel = document.getElementById(selId);
           const cur = sel.value;
-          sel.innerHTML = '<option value="">Aǵzanı tańlań…</option>' +
-            store.members.map(m => `<option value="${m.id}">${esc(m.name || m.full_name || m.email)}</option>`).join('');
+          sel.innerHTML =
+            '<option value="">Aǵzanı tańlań…</option>' +
+            store.members
+              .map(
+                (m) =>
+                  `<option value="${m.id}">${esc(
+                    m.name || m.full_name || m.email
+                  )}</option>`
+              )
+              .join("");
           if (cur) sel.value = cur;
         });
       }
       function populateBookSelects() {
-        ['borrowing-book', 'review-book'].forEach(selId => {
+        ["borrowing-book", "review-book"].forEach((selId) => {
           const sel = document.getElementById(selId);
           const cur = sel.value;
-          sel.innerHTML = '<option value="">Kitaptı tańlań…</option>' +
-            store.books.map(b => `<option value="${b.id}">${esc(b.title)}</option>`).join('');
+          sel.innerHTML =
+            '<option value="">Kitaptı tańlań…</option>' +
+            store.books
+              .map((b) => `<option value="${b.id}">${esc(b.title)}</option>`)
+              .join("");
           if (cur) sel.value = cur;
         });
       }
 
-      /* =============================================================
-       BORROWINGS
-      ============================================================= */
+      /* BORROWINGS */
       async function loadBorrowings() {
-        setLoading('borrowings-tbody', 7);
+        setLoading("borrowings-tbody", 7);
         const [borData, booksData, membersData] = await Promise.all([
           safeFetch(API.borrowing),
-          store.books.length   ? Promise.resolve(null) : safeFetch(API.books),
+          store.books.length ? Promise.resolve(null) : safeFetch(API.books),
           store.members.length ? Promise.resolve(null) : safeFetch(API.members),
         ]);
         store.borrowings = normalize(borData);
-        if (booksData)   store.books   = normalize(booksData);
+        if (booksData) store.books = normalize(booksData);
         if (membersData) store.members = normalize(membersData);
-        populateBookSelects(); populateMemberSelects();
+        populateBookSelects();
+        populateMemberSelects();
         renderBorrowings();
       }
 
       function getBookTitle(val) {
-        if (!val || typeof val === 'object') return null;
-        const b = store.books.find(x => x.id == val);
+        if (!val || typeof val === "object") return null;
+        const b = store.books.find((x) => x.id == val);
         return b ? b.title : null;
       }
 
       function renderBorrowings() {
-        const tbody = document.getElementById('borrowings-tbody');
-        if (!store.borrowings.length) { setEmpty('borrowings-tbody', 7, 'Alınǵan kitaplar joq.'); return; }
-        tbody.innerHTML = store.borrowings.map(b => {
-          const bookTitle  = (typeof b.book   === 'object' ? b.book?.title   : null) || b.book_title   || getBookTitle(b.book)   || String(b.book   ?? '—');
-          const memberName = (typeof b.member === 'object' ? b.member?.name  : null) || b.member_name  || getMemberName(b.member) || String(b.member ?? '—');
-          const returned   = b.return_date || b.returned_date;
-          return `<tr>
+        const tbody = document.getElementById("borrowings-tbody");
+        if (!store.borrowings.length) {
+          setEmpty("borrowings-tbody", 7, "Alınǵan kitaplar joq.");
+          return;
+        }
+        tbody.innerHTML = store.borrowings
+          .map((b) => {
+            const bookTitle =
+              (typeof b.book === "object" ? b.book?.title : null) ||
+              b.book_title ||
+              getBookTitle(b.book) ||
+              String(b.book ?? "—");
+            const memberName =
+              (typeof b.member === "object" ? b.member?.name : null) ||
+              b.member_name ||
+              getMemberName(b.member) ||
+              String(b.member ?? "—");
+            const returned = b.return_date || b.returned_date;
+            return `<tr>
             <td>${b.id}</td>
             <td>${esc(bookTitle)}</td>
             <td>${esc(memberName)}</td>
             <td>${fmt(b.borrow_date || b.borrowed_date)}</td>
-            <td>${returned ? fmt(returned) : '—'}</td>
-            <td>${returned
-              ? '<span class="badge badge-success">Tapsırıldı</span>'
-              : '<span class="badge badge-warn">Aktiv</span>'}</td>
+            <td>${returned ? fmt(returned) : "—"}</td>
+            <td>${
+              returned
+                ? '<span class="badge badge-success">Tapsırıldı</span>'
+                : '<span class="badge badge-warn">Aktiv</span>'
+            }</td>
             <td><div class="td-actions">
-              <button class="btn btn-ghost btn-sm" onclick="editBorrowing(${b.id})">✏️ Edit</button>
-              <button class="btn btn-danger btn-sm" onclick="confirmDelete('borrowings',${b.id})">🗑️</button>
+              <button class="btn btn-ghost btn-sm" onclick="editBorrowing(${
+                b.id
+              })">✏️ Ózgertiw</button>
+              <button class="btn btn-danger btn-sm" onclick="confirmDelete('borrowings',${
+                b.id
+              })">🗑️</button>
             </div></td>
           </tr>`;
-        }).join('');
+          })
+          .join("");
       }
 
       function openBorrowingModal() {
-        document.getElementById('borrowing-modal-title').textContent = 'Jańa jazba';
-        document.getElementById('borrowing-id').value = '';
-        document.getElementById('borrowing-book').value = '';
-        document.getElementById('borrowing-member').value = '';
-        document.getElementById('borrowing-date').value = new Date().toISOString().split('T')[0];
-        document.getElementById('borrowing-return').value = '';
-        populateBookSelects(); populateMemberSelects();
-        _openModal('borrowing-modal');
+        document.getElementById("borrowing-modal-title").textContent =
+          "Jańa jazba";
+        document.getElementById("borrowing-id").value = "";
+        document.getElementById("borrowing-book").value = "";
+        document.getElementById("borrowing-member").value = "";
+        document.getElementById("borrowing-date").value = new Date()
+          .toISOString()
+          .split("T")[0];
+        document.getElementById("borrowing-return").value = "";
+        populateBookSelects();
+        populateMemberSelects();
+        _openModal("borrowing-modal");
       }
 
       function editBorrowing(id) {
-        const b = store.borrowings.find(x => x.id == id);
+        const b = store.borrowings.find((x) => x.id == id);
         if (!b) return;
-        document.getElementById('borrowing-modal-title').textContent = 'Jazbanı ózgertiw';
-        document.getElementById('borrowing-id').value = b.id;
-        const bookId   = typeof b.book   === 'object' ? b.book?.id   : b.book;
-        const memberId = typeof b.member === 'object' ? b.member?.id : b.member;
-        populateBookSelects(); populateMemberSelects();
-        document.getElementById('borrowing-book').value   = bookId   || '';
-        document.getElementById('borrowing-member').value = memberId || '';
-        document.getElementById('borrowing-date').value   = b.borrow_date   || b.borrowed_date  || '';
-        document.getElementById('borrowing-return').value = b.return_date   || b.returned_date  || '';
-        _openModal('borrowing-modal');
+        document.getElementById("borrowing-modal-title").textContent =
+          "Jazbanı ózgertiw";
+        document.getElementById("borrowing-id").value = b.id;
+        const bookId = typeof b.book === "object" ? b.book?.id : b.book;
+        const memberId = typeof b.member === "object" ? b.member?.id : b.member;
+        populateBookSelects();
+        populateMemberSelects();
+        document.getElementById("borrowing-book").value = bookId || "";
+        document.getElementById("borrowing-member").value = memberId || "";
+        document.getElementById("borrowing-date").value =
+          b.borrow_date || b.borrowed_date || "";
+        document.getElementById("borrowing-return").value =
+          b.return_date || b.returned_date || "";
+        _openModal("borrowing-modal");
       }
 
       async function saveBorrowing() {
-        const id     = document.getElementById('borrowing-id').value;
-        const book   = document.getElementById('borrowing-book').value;
-        const member = document.getElementById('borrowing-member').value;
-        const date   = document.getElementById('borrowing-date').value;
-        if (!book || !member || !date) { toast('Kitap, aǵza hám sáne kerek.', 'error'); return; }
+        const id = document.getElementById("borrowing-id").value;
+        const book = document.getElementById("borrowing-book").value;
+        const member = document.getElementById("borrowing-member").value;
+        const date = document.getElementById("borrowing-date").value;
+        if (!book || !member || !date) {
+          toast("Kitap, aǵza hám sáne kerek.", "error");
+          return;
+        }
         const payload = {
-          book: parseInt(book), member: parseInt(member),
+          book: parseInt(book),
+          member: parseInt(member),
           borrow_date: date,
-          return_date: document.getElementById('borrowing-return').value || null,
+          return_date:
+            document.getElementById("borrowing-return").value || null,
         };
         try {
           if (id) {
-            const updated = await apiFetch(`${API.borrowing}${id}/`, { method: 'PUT', body: JSON.stringify(payload) });
-            const idx = store.borrowings.findIndex(x => x.id == id);
-            store.borrowings[idx] = updated || { ...store.borrowings[idx], ...payload };
-            toast('Jazba jańalandı!');
+            const updated = await apiFetch(`${API.borrowing}${id}/`, {
+              method: "PUT",
+              body: JSON.stringify(payload),
+            });
+            const idx = store.borrowings.findIndex((x) => x.id == id);
+            store.borrowings[idx] = updated || {
+              ...store.borrowings[idx],
+              ...payload,
+            };
+            toast("Jazba jańalandı!");
           } else {
-            const created = await apiFetch(API.borrowing, { method: 'POST', body: JSON.stringify(payload) });
+            const created = await apiFetch(API.borrowing, {
+              method: "POST",
+              body: JSON.stringify(payload),
+            });
             store.borrowings.push(created || { id: Date.now(), ...payload });
-            toast('Jazba qosıldı!');
+            toast("Jazba qosıldı!");
           }
-          closeModal('borrowing-modal'); renderBorrowings(); loadStats();
-        } catch (e) { toast(e.message, 'error'); }
+          closeModal("borrowing-modal");
+          renderBorrowings();
+          loadStats();
+        } catch (e) {
+          toast(e.message, "error");
+        }
       }
 
-      /* =============================================================
-       REVIEWS
-      ============================================================= */
+      /* REVIEWS */
       async function loadReviews() {
-        document.getElementById('reviews-container').innerHTML =
+        document.getElementById("reviews-container").innerHTML =
           '<div class="loading"><div class="spinner"></div>Pikirler júklenbekte…</div>';
         const [revData, booksData, membersData] = await Promise.all([
           safeFetch(API.reviews),
-          store.books.length   ? Promise.resolve(null) : safeFetch(API.books),
+          store.books.length ? Promise.resolve(null) : safeFetch(API.books),
           store.members.length ? Promise.resolve(null) : safeFetch(API.members),
         ]);
         store.reviews = normalize(revData);
-        if (booksData)   store.books   = normalize(booksData);
+        if (booksData) store.books = normalize(booksData);
         if (membersData) store.members = normalize(membersData);
-        populateBookSelects(); populateMemberSelects();
+        populateBookSelects();
+        populateMemberSelects();
         renderReviews();
       }
 
       function renderReviews() {
-        const c = document.getElementById('reviews-container');
+        const c = document.getElementById("reviews-container");
         if (!store.reviews.length) {
           c.innerHTML = `<div class="empty-state"><div class="empty-icon">⭐</div><p>Pikirler joq.</p></div>`;
           return;
         }
-        c.innerHTML = `<div class="reviews-grid">${store.reviews.map(r => {
-          const rating    = Math.min(5, Math.max(1, r.rating || 0));
-          const bookTitle = (typeof r.book   === 'object' ? r.book?.title  : null) || r.book_title  || getBookTitle(r.book) || '—';
-          const memName   = (typeof r.member === 'object' ? r.member?.name : null) || r.member_name || getMemberName(r.member) || 'Anonimniy';
-          const text      = r.review_text || r.text || r.comment || '';
-          return `<div class="review-card">
+        c.innerHTML = `<div class="reviews-grid">${store.reviews
+          .map((r) => {
+            const rating = Math.min(5, Math.max(1, r.rating || 0));
+            const bookTitle =
+              (typeof r.book === "object" ? r.book?.title : null) ||
+              r.book_title ||
+              getBookTitle(r.book) ||
+              "—";
+            const memName =
+              (typeof r.member === "object" ? r.member?.name : null) ||
+              r.member_name ||
+              getMemberName(r.member) ||
+              "Anonimniy";
+            const text = r.review_text || r.text || r.comment || "";
+            return `<div class="review-card">
             <div class="review-header">
               <div class="review-book">📖 ${esc(bookTitle)}</div>
-              <div class="review-stars">${'⭐'.repeat(rating)}</div>
+              <div class="review-stars">${"⭐".repeat(rating)}</div>
             </div>
-            ${text ? `<div class="review-text">${esc(text)}</div>` : ''}
+            ${text ? `<div class="review-text">${esc(text)}</div>` : ""}
             <div class="review-member">👤 ${esc(memName)}
               <span style="float:right">
-                <button class="btn btn-danger btn-sm" onclick="confirmDelete('reviews',${r.id})">🗑️</button>
+                <button class="btn btn-danger btn-sm" onclick="confirmDelete('reviews',${
+                  r.id
+                })">🗑️</button>
               </span>
             </div>
           </div>`;
-        }).join('')}</div>`;
+          })
+          .join("")}</div>`;
       }
 
       function openReviewModal() {
-        document.getElementById('review-modal-title').textContent = 'Pikir qosıw';
-        document.getElementById('review-id').value = '';
-        document.getElementById('review-text').value = '';
-        document.getElementById('review-rating').value = '5';
-        populateBookSelects(); populateMemberSelects();
-        _openModal('review-modal');
+        document.getElementById("review-modal-title").textContent =
+          "Pikir qosıw";
+        document.getElementById("review-id").value = "";
+        document.getElementById("review-text").value = "";
+        document.getElementById("review-rating").value = "5";
+        populateBookSelects();
+        populateMemberSelects();
+        _openModal("review-modal");
       }
 
       async function saveReview() {
-        const id     = document.getElementById('review-id').value;
-        const book   = document.getElementById('review-book').value;
-        const member = document.getElementById('review-member').value;
-        if (!book || !member) { toast('Kitap hám aǵza kerek.', 'error'); return; }
+        const id = document.getElementById("review-id").value;
+        const book = document.getElementById("review-book").value;
+        const member = document.getElementById("review-member").value;
+        if (!book || !member) {
+          toast("Kitap hám aǵza kerek.", "error");
+          return;
+        }
         const payload = {
-          book: parseInt(book), member: parseInt(member),
-          rating: parseInt(document.getElementById('review-rating').value),
-          review_text: document.getElementById('review-text').value.trim(),
+          book: parseInt(book),
+          member: parseInt(member),
+          rating: parseInt(document.getElementById("review-rating").value),
+          review_text: document.getElementById("review-text").value.trim(),
         };
         try {
           if (id) {
-            const updated = await apiFetch(`${API.reviews}${id}/`, { method: 'PUT', body: JSON.stringify(payload) });
-            const idx = store.reviews.findIndex(x => x.id == id);
-            store.reviews[idx] = updated || { ...store.reviews[idx], ...payload };
-            toast('Pikir jańalandı!');
+            const updated = await apiFetch(`${API.reviews}${id}/`, {
+              method: "PUT",
+              body: JSON.stringify(payload),
+            });
+            const idx = store.reviews.findIndex((x) => x.id == id);
+            store.reviews[idx] = updated || {
+              ...store.reviews[idx],
+              ...payload,
+            };
+            toast("Pikir jańalandı!");
           } else {
-            const created = await apiFetch(API.reviews, { method: 'POST', body: JSON.stringify(payload) });
+            const created = await apiFetch(API.reviews, {
+              method: "POST",
+              body: JSON.stringify(payload),
+            });
             store.reviews.push(created || { id: Date.now(), ...payload });
-            toast('Pikir qosıldı!');
+            toast("Pikir qosıldı!");
           }
-          closeModal('review-modal'); renderReviews();
-        } catch (e) { toast(e.message, 'error'); }
+          closeModal("review-modal");
+          renderReviews();
+        } catch (e) {
+          toast(e.message, "error");
+        }
       }
 
-      /* =============================================================
-       DELETE
-      ============================================================= */
+      /* DELETE */
       function confirmDelete(entity, id) {
-        _openModal('confirm-modal');
-        document.getElementById('confirm-delete-btn').onclick = async () => {
-          const apiKey = entity === 'borrowings' ? 'borrowing' : entity;
+        _openModal("confirm-modal");
+        document.getElementById("confirm-delete-btn").onclick = async () => {
+          const apiKey = entity === "borrowings" ? "borrowing" : entity;
           try {
-            await apiFetch(`${API[apiKey]}${id}/`, { method: 'DELETE' });
+            await apiFetch(`${API[apiKey]}${id}/`, { method: "DELETE" });
           } catch (e) {
-            if (!e.message.includes('404')) {
-              toast(e.message, 'error');
-              closeModal('confirm-modal');
+            if (!e.message.includes("404")) {
+              toast(e.message, "error");
+              closeModal("confirm-modal");
               return;
             }
           }
-          store[entity] = store[entity].filter(x => x.id != id);
-          closeModal('confirm-modal');
-          toast('Óshirildi ✅');
-          if (entity === 'books')      { renderBooks(); }
-          if (entity === 'members')    { renderMembers(); populateMemberSelects(); }
-          if (entity === 'borrowings') { renderBorrowings(); }
-          if (entity === 'reviews')    { renderReviews(); }
+          store[entity] = store[entity].filter((x) => x.id != id);
+          closeModal("confirm-modal");
+          toast("Óshirildi ✅");
+          if (entity === "books") {
+            renderBooks();
+          }
+          if (entity === "members") {
+            renderMembers();
+            populateMemberSelects();
+          }
+          if (entity === "borrowings") {
+            renderBorrowings();
+          }
+          if (entity === "reviews") {
+            renderReviews();
+          }
           loadStats();
         };
       }
 
-      /* =============================================================
-       UTILS
-      ============================================================= */
+      /* UTILS */
       function esc(str) {
-        if (!str) return '';
-        return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        if (!str) return "";
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
       }
       function fmt(dateStr) {
-        if (!dateStr) return '—';
-        try { return new Date(dateStr).toLocaleDateString('en-GB'); } catch { return dateStr; }
+        if (!dateStr) return "—";
+        try {
+          return new Date(dateStr).toLocaleDateString("en-GB");
+        } catch {
+          return dateStr;
+        }
       }
     </script>
   </body>
